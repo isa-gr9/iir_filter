@@ -15,8 +15,4 @@ vcom ../tb/data_sink.vhd
 vlog ../tb/tb_iir.v
 
 
-vsim -do run.do 
-
-vdel -lib work all
-
-rm -f *.wlf *.log transcript
+vsim -do ../scripts/run.do 

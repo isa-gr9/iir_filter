@@ -41,28 +41,27 @@ architecture behavioral of iir is
 begin
         
     RIN:
-    process (CLK, RST_n)
+    process (CLK, RST_n, VIN)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
         x <= (others => '0');
-        elsif (VIN='1' and CLK'event and CLK = '1') then  -- rising clock edge           
+        elsif (VIN ='1' and CLK'event and CLK = '1') then  -- rising clock edge           
         x <= DIN;
         end if;
     end process;
     
     ROUT:
-    process (CLK, RST_n)
+    process (CLK, RST_n, VIN)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             DOUT <= (others => '0');
         elsif (VIN='1' and CLK'event and CLK = '1') then  -- rising clock edge           
             DOUT <= y;
-            VOUT <= '1';
         end if;
     end process;
     
     AB:
-    process (CLK, RST_n)
+    process (CLK, RST_n, VIN)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             a1_i <= (others => '0');
@@ -77,7 +76,7 @@ begin
 
 
     R1:
-    process (CLK, RST_n)
+    process (CLK, RST_n, VIN)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             w_i <= (others => '0');
@@ -110,8 +109,9 @@ begin
             temp_y <= (others => '0'); -- Initialize the temporary variable
             
             for i in 0 to 12 loop
-                temp_y(i) <= w_i(i) and b1_i(i); -- Bitwise AND operation
-                temp_y(i) <= temp_y(i) or (w(i) and b0_i(i)); -- Bitwise AND-NOT operation
+              --  temp_y(i) <= w_i(i) and b1_i(i); -- Bitwise AND operation
+              -- temp_y(i) <= temp_y(i) or (w(i) and b0_i(i)); -- Bitwise AND-NOT operation
+              temp_y(i) <= w_i(i) * b1_i(i) + w(i) *b0_i(i);
             end loop;
             
             y <= temp_y; -- Assign the result back to y
