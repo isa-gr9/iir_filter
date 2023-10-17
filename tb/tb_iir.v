@@ -28,13 +28,13 @@ module tb_iir ();
 
    iir UUT(.CLK(CLK_i),
 	        .RST_n(RST_n_i),
-           .VIN(VIN_i),
+                .VIN(VIN_i),
 	        .DIN(DIN_i),
 	        .a1(A1_i),
 	        .b0(B0_i),
 	        .b1(B1_i),
-           .DOUT(DOUT_i),
-           .VOUT(VOUT_i));
+                .DOUT(DOUT_i),
+                .VOUT(VOUT_i));
 
    data_sink DS(.CLK(CLK_i),
 		          .RST_n(RST_n_i),

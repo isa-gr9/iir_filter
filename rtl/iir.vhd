@@ -32,10 +32,15 @@ architecture behavioral of iir is
     signal b1_i: std_logic_vector(12 downto 0);
     signal b0_i: std_logic_vector(12 downto 0);    
     signal temp_w : std_logic_vector(12 downto 0); -- Use a variable for intermediate result
-    signal temp_y : std_logic_vector(12 downto 0); -- Use a variable for intermediate result
+    signal temp_y : std_logic_vector(4 downto 0); -- Use a variable for intermediate result
+   
+
         
     signal en : std_logic := '1';
-    
+    signal en2 : std_logic;
+
+    constant NB : integer := 13;         -- Number of bits (NB)
+    constant SHAMT : integer := 21;     -- Number of bits to shift (SHAMT)
 
 
 begin
@@ -51,12 +56,13 @@ begin
     end process;
     
     ROUT:
-    process (CLK, RST_n, VIN)
+    process (CLK, RST_n)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             DOUT <= (others => '0');
-        elsif (VIN='1' and CLK'event and CLK = '1') then  -- rising clock edge           
+        elsif (en2='1' and CLK'event and CLK = '1') then  -- rising clock edge           
             DOUT <= y;
+            VOUT <= '1';
         end if;
     end process;
     
@@ -75,6 +81,7 @@ begin
     end process;
 
 
+    --INTERNAL REGISTER
     R1:
     process (CLK, RST_n, VIN)
     begin
@@ -89,14 +96,12 @@ begin
 
     fb:
     process(CLK)
+    variable mul1 : std_logic_vector(25 downto 0);
     begin
         if rising_edge(CLK) then
             temp_w <= (others => '0'); -- Initialize the temporary variable
-            
-            for i in 0 to 12 loop
-                temp_w(i) <= w_i(i) and a1_i(i); -- Bitwise AND operation
-                temp_w(i) <= temp_w(i) or (x(i) and not a1_i(i)); -- Bitwise AND-NOT operation
-            end loop;
+            mul1 := w_i * a1_i;
+            temp_w <= x + mul1(4 downto 0);
             w <= temp_w; -- Assign the result back to w
         end if;
     end process;
@@ -104,17 +109,17 @@ begin
 
     ff:
     process(CLK)
+    variable mul2 : std_logic_vector(25 downto 0);
+    variable mul3 : std_logic_vector(25 downto 0);
     begin
         if rising_edge(CLK) then
             temp_y <= (others => '0'); -- Initialize the temporary variable
-            
-            for i in 0 to 12 loop
-              --  temp_y(i) <= w_i(i) and b1_i(i); -- Bitwise AND operation
-              -- temp_y(i) <= temp_y(i) or (w(i) and b0_i(i)); -- Bitwise AND-NOT operation
-              temp_y(i) <= w_i(i) * b1_i(i) + w(i) *b0_i(i);
-            end loop;
-            
-            y <= temp_y; -- Assign the result back to y
+            mul2 := w_i * b1_i;
+            mul3 := w * b0_i;
+            temp_y <= mul2(4 downto 0) + mul3(4 downto 0);
+            y <= temp_y & "00000000"; -- Assign the result back to y
+            en2 <= '1';
+
         end if;
     end process;
 

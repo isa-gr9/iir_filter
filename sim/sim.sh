@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Exit immediately if any command fails
-set -e
+#set -e
 
 
 #COMPILE
