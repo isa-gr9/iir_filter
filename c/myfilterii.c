@@ -4,11 +4,11 @@
 #define N 1 /// order of the filter
 #define NTm1 (N) /// number of coeffients minus one (equal to the order)
 #define NB 13  /// number of bits
-#define SHAMT 21 /// shift amount
+#define SHAMT 20 /// shift amount
 
-const int bi0 = 1692; /// coefficient b0
-const int bi[NTm1]={3384, 1692}; /// b array
-const int ai[NTm1]={-3028, 1604}; /// a array
+const int bi0 = 1723; /// coefficient b0
+const int bi= 1723; /// b array
+const int ai= -649; /// a array
 
 /// Perform fixed point filtering assuming direct form II
 ///\param x is the new input sample
@@ -35,8 +35,8 @@ int myfilter(int x)
   ff = 0;
   for (i=0; i<NTm1; i++)
   {
-    fb -= ((sw[i]*ai[i]) >> SHAMT) << (SHAMT-NB+1);    
-    ff += ((sw[i]*bi[i]) >> SHAMT) << (SHAMT-NB+1);    
+    fb -= ((sw[i]*ai) >> SHAMT) << (SHAMT-NB+1);    
+    ff += ((sw[i]*bi) >> SHAMT) << (SHAMT-NB+1);    
   }
 
   /// compute intermediate value (w) and output sample
