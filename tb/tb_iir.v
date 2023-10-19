@@ -5,7 +5,7 @@ module tb_iir ();
    wire CLK_i;
    wire RST_n_i;
    wire [12:0] DIN_i;
-   wire VI2_i;
+   wire VIN_i;
    wire [12:0] A1_i;
    wire [12:0] B1_i;
    wire [12:0] B0_i;
@@ -26,15 +26,15 @@ module tb_iir ();
 		           .A1(A1_i),
 		           .END_SIM(END_SIM_i));
 
-   iir UUT(.CLK(CLK_i),
-	        .RST_n(RST_n_i),
-                .VIN(VIN_i),
-	        .DIN(DIN_i),
-	        .a1(A1_i),
-	        .b0(B0_i),
-	        .b1(B1_i),
-                .DOUT(DOUT_i),
-                .VOUT(VOUT_i));
+   iir UUT( .CLK(CLK_i),
+	         .RST_n(RST_n_i),
+            .VIN(VIN_i),
+	         .DIN(DIN_i),
+	         .a1(A1_i),
+	         .b0(B0_i),
+	         .b1(B1_i),
+            .DOUT(DOUT_i),
+            .VOUT(VOUT_i));
 
    data_sink DS(.CLK(CLK_i),
 		          .RST_n(RST_n_i),

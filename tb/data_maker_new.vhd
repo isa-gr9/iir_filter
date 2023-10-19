@@ -23,7 +23,7 @@ end data_maker;
 
 architecture beh of data_maker is
 
-  constant tco : time := 10 ns;
+  constant tco : time := 10 ps;
   constant N_CYC_END_SIM : integer := 11;
   constant LFSR_INIT : integer := 1365;  
 
