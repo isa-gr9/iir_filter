@@ -25,48 +25,48 @@ end iir;
         
 architecture behavioral of iir is
     constant SHAMT : positive := 20;  -- Shift amount
-    constant NB : positive := 13;  -- Shift amount
-        
-    signal x : std_logic_vector(12 downto 0);
-    signal y : std_logic_vector(12 downto 0);
-    signal w : std_logic_vector(12 downto 0);
+    constant NB    : positive := 13;  -- Shift amount
+    
+    -- Internal signals
+    signal x   : std_logic_vector(NB -1 downto 0);
+    signal y   : std_logic_vector(NB -1 downto 0);
+    signal w   : std_logic_vector(NB -1 downto 0);
+    signal w_i : std_logic_vector(NB -1 downto 0);
    
-    
-    signal a1_i: std_logic_vector(12 downto 0);
-    signal b1_i: std_logic_vector(12 downto 0);
-    signal b0_i: std_logic_vector(12 downto 0);    
+    -- Internal parameters after the registers
+    signal a1_i: std_logic_vector(NB -1 downto 0);
+    signal b1_i: std_logic_vector(NB -1 downto 0);
+    signal b0_i: std_logic_vector(NB -1 downto 0);    
 
-    signal y_temp2 : std_logic_vector(12 downto 0) := (others => '0');
-    signal y_temp : std_logic_vector(25 downto 0) := (others => '0');
-    signal fb_temp : std_logic_vector(25 downto 0) := (others => '0');
-    signal fb_temp2 : std_logic_vector(12 downto 0) := (others => '0');
-    signal ff_temp2 : std_logic_vector(12 downto 0) := (others => '0');
-    signal ff_temp : std_logic_vector(25 downto 0) := (others => '0');
-    signal fb: std_logic_vector(12 downto 0) := (others => '0');
-    signal ff: std_logic_vector(12 downto 0) := (others => '0');
-    signal sw: std_logic_vector(12 downto 0) := (others => '0');
-    signal w_i : std_logic_vector(12 downto 0) := (others => '0');
-    
-                    
+    -- Temporary signals for storing the multiplication
+    signal temp_c  : std_logic_vector(25 downto 0) := (others => '0');
+    signal temp_d  : std_logic_vector(25 downto 0) := (others => '0');
+    signal temp_e  : std_logic_vector(25 downto 0) := (others => '0');    
+                 
+    -- Signal that shift the multiplication output
+    signal c   : std_logic_vector(NB -1 downto 0) := (others => '0');
+    signal d   : std_logic_vector(NB -1 downto 0) := (others => '0'); 
+    signal e   : std_logic_vector(NB -1 downto 0) := (others => '0');
         
     signal en : std_logic := '1';
 
 
 begin
-        
-    RIN:
-    process (CLK, RST_n, VIN)
+    
+    --################### Registers ################################
+    
+    u_rin:
+    process (CLK, RST_n)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
-        x <= (others => '0');
+            x <= (others => '0');
         elsif (VIN ='1' and CLK'event and CLK = '1') then  -- rising clock edge           
-        x <= DIN;
+            x <= DIN;
         end if;
     end process;
     
-
-    ROUT:
-    process (CLK, RST_n, VIN, y)
+    u_rout:
+    process (CLK, RST_n)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             DOUT <= (others => '0');
@@ -76,8 +76,8 @@ begin
         end if;
     end process;
     
-    AB:
-    process (CLK, RST_n, VIN)
+    u_parameters:
+    process (CLK, RST_n)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             a1_i <= (others => '0');
@@ -90,41 +90,56 @@ begin
         end if;
     end process;
 
-
-    --INTERNAL REGISTER
-    --R1:
-    --process (CLK, RST_n, VIN)
-    --begin
-     --   if (RST_n = '0') then                 -- asynchronous reset (active low)
-      --      w_i <= (others => '0');
-       -- elsif (en = '1' and CLK'event and CLK = '1') then  -- rising clock edge           
-        --    w_i <= w;
-        --end if;
-    --end process;
-
-        
-
-    A:
-    process(CLK, RST_n, x, VIN)
+    --Internal Register
+    u_reg:
+    process (CLK, RST_n)
     begin
-        if RST_n = '0' then
-            sw <= (others => '0');
-            fb <= (others => '0');
-            ff <= (others => '0');
+        if (RST_n = '0') then                 -- asynchronous reset (active low)
             w_i <= (others => '0');
-            elsif (en='1' and CLK'event and CLK = '1') then  -- rising clock edge 
-            -- Compute feed-back and feed-forward
-           -- fb_temp <= sw * a1_i;
-           -- fb_temp2 <= fb_temp(24 downto 20) & "00000000";
-           -- fb <= fb - fb_temp2;
-            --ff_temp <= sw * b1_i;
-           -- ff_temp2 <= ff_temp(24 downto 20) & "00000000";
-            --ff <= ff + ff_temp2;
-            --w_i <= x + fb;
-            y_temp <= x * b0_i;
-            y <= y_temp(24 downto 20) & "00000000";
-            --y <= ff + y_temp2;
+        elsif (en = '1' and CLK'event and CLK = '1') then  -- rising clock edge           
+            w_i <= w;
         end if;
     end process;
+
+    --################ Implementation ###################
+    
+    u_filter:
+    process (CLK, RST_N)
+    begin
+        temp_c <= a1 * w_i;
+        temp_d <= b1 * w_i;
+        temp_e <= b0 * w;
+
+        c <=  temp_c(24 downto 20) & "0000000";
+        d <=  temp_d(24 downto 20) & "0000000";
+        e <=  temp_e(24 downto 20) & "0000000";
+
+        w <= x + c;
+        y <= e + d;
+    end process;
+
+
+    --A:
+    --process(CLK, RST_n, VIN)
+    --begin
+    --    if RST_n = '0' then
+    --        sw <= (others => '0');
+    --        fb <= (others => '0');
+    --        ff <= (others => '0');
+    --        w_i <= (others => '0');
+    --        elsif (en='1' and CLK'event and CLK = '1') then  -- rising clock edge 
+    --        -- Compute feed-back and feed-forward
+    --       -- fb_temp <= sw * a1_i;
+    --       -- fb_temp2 <= fb_temp(24 downto 20) & "00000000";
+    --       -- fb <= fb - fb_temp2;
+    --        --ff_temp <= sw * b1_i;
+    --       -- ff_temp2 <= ff_temp(24 downto 20) & "00000000";
+    --        --ff <= ff + ff_temp2;
+    --        --w_i <= x + fb;
+    --        y_temp <= x * b0_i;
+    --        y <= y_temp(24 downto 20) & "00000000";
+    --        --y <= ff + y_temp2;
+    --    end if;
+    --end process;
     
 end behavioral;
