@@ -3,3 +3,5 @@ vsim work.tb_iir
 add wave *
 run 2000 ns
 wave zoom full
+quit -sim
+exit -f

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Exit immediately if any command fails
-#set -e
+set -e
 
 
 #COMPILE
@@ -15,4 +15,10 @@ vcom ../tb/data_sink.vhd
 vlog ../tb/tb_iir.v
 
 
-vsim -do ../scripts/run.do 
+vsim -do ../scripts/run.do
+
+# Remove work directory
+rm -rf work
+
+# Remove vsim and transcript files
+rm -f vsim.wlf transcript
