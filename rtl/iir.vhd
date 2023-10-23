@@ -70,7 +70,7 @@ begin
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             DOUT <= (others => '0');
-        elsif (en='1' and CLK'event and CLK = '1') then  -- rising clock edge           
+        elsif (VIN='1' and CLK'event and CLK = '1') then  -- rising clock edge           
             DOUT <= y;
             VOUT <= '1';
         end if;
@@ -103,22 +103,47 @@ begin
 
     --################ Implementation ###################
     
-    u_filter:
+    --u_filter:
+    --process (CLK, RST_N)
+    --begin
+    --    temp_c <= a1 * w_i;
+    --    temp_d <= b1 * w_i;
+    --    temp_e <= b0 * w;
+    --    
+    --    c <=  temp_c(24 downto 20) & "00000000";
+    --    d <=  temp_d(24 downto 20) & "00000000";
+    --    e <=  temp_e(24 downto 20) & "00000000";
+--
+    --    w <= x + c;
+    --    y <= e + d;
+    --end process;
+
+
+
+    u_fb:
     process (CLK, RST_N)
     begin
         temp_c <= a1 * w_i;
-        temp_d <= b1 * w_i;
-        temp_e <= b0 * w;
-
-        c <=  temp_c(24 downto 20) & "0000000";
-        d <=  temp_d(24 downto 20) & "0000000";
-        e <=  temp_e(24 downto 20) & "0000000";
+        
+        c <=  temp_c(24 downto 20) & "00000000";
 
         w <= x + c;
-        y <= e + d;
+
     end process;
 
+    u_ff:
+    process (CLK, RST_N)
+    begin
+        temp_d <= a1 * w_i;
+        temp_e <= b0 * w;
+        
+        d <=  temp_d(24 downto 20) & "00000000";
+        e <=  temp_e(24 downto 20) & "00000000";
 
+        y <= e + d;
+
+    end process;
+    
     --A:
     --process(CLK, RST_n, VIN)
     --begin
