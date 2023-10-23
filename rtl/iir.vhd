@@ -1,12 +1,6 @@
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
-use ieee.std_logic_arith.all;
-use ieee.std_logic_arith.SIGNED;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-use ieee.NUMERIC_STD.SIGNED;
-use ieee.std_logic_arith.SIGNED;
-
 
 entity iir is
     port (
@@ -29,34 +23,46 @@ architecture behavioral of iir is
     
     -- Internal signals
     signal x   : std_logic_vector(NB -1 downto 0);
-    signal y   : std_logic_vector(NB -1 downto 0);
-    signal w   : std_logic_vector(NB -1 downto 0);
-    signal w_i : std_logic_vector(NB -1 downto 0);
-    signal w_i : std_logic_vector(NB -1 downto 0);
+    signal y   : signed(NB -1 downto 0);
+    signal w   : signed(NB -1 downto 0);
+    signal w_i : signed(NB -1 downto 0);
    
     -- Internal parameters after the registers
-    signal a1_i: std_logic_vector(NB -1 downto 0);
-    signal b1_i: std_logic_vector(NB -1 downto 0);
-    signal b0_i: std_logic_vector(NB -1 downto 0);    
-
-    signal a1_signed, b1_signed, b0_signed, result_signed : integer;
+    signal a1_i: signed(NB -1 downto 0);
+    signal b1_i: signed(NB -1 downto 0);
+    signal b0_i: signed(NB -1 downto 0);    
 
 
-    -- Temporary signals for storing the multiplication
-    signal temp_c  : std_logic_vector(25 downto 0) := (others => '0');
-    signal temp_d  : std_logic_vector(25 downto 0) := (others => '0');
-    signal temp_e  : std_logic_vector(25 downto 0) := (others => '0');    
-                 
-    -- Signal that shift the multiplication output
-    signal c   : std_logic_vector(NB -1 downto 0) := (others => '0');
-    signal d   : std_logic_vector(NB -1 downto 0) := (others => '0'); 
-    signal e   : std_logic_vector(NB -1 downto 0) := (others => '0');
-        
-    signal en : std_logic := '1';
-
-
-begin
+    signal temp_c  : signed(25 downto 0) := (others => '0');
+    signal temp_d  : signed(25 downto 0) := (others => '0');
+    signal temp_e  : signed(25 downto 0) := (others => '0');    
     
+    -- Signal that shift the multiplication output
+    signal c   : signed(NB -1 downto 0) := (others => '0');
+    signal d   : signed(NB -1 downto 0) := (others => '0'); 
+    signal e   : signed(NB -1 downto 0) := (others => '0');
+    
+    signal en : std_logic := '1';
+    
+    
+    begin
+        -- Temporary signals for storing the multiplication
+        
+        --################ Implementation ###################
+        
+        --TBD: METTERE TO SIGNED
+    
+        temp_c <= a1_i * w_i;
+        temp_d <= b1_i * w_i;
+        temp_e <= b0_i * w;
+    
+        c <=  temp_c(25 downto 20) & "0000000";
+        d <=  temp_d(25 downto 20) & "0000000";
+        e <=  temp_e(25 downto 20) & "0000000";
+        
+        
+        w <= signed(x) + c;      
+        y <= e + d;
     --################### Registers ################################
     
     u_rin:
@@ -75,7 +81,7 @@ begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             DOUT <= (others => '0');
         elsif (VIN='1' and CLK'event and CLK = '1') then  -- rising clock edge           
-            DOUT <= y;
+            DOUT <= std_logic_vector(y);
             VOUT <= '1';
         end if;
     end process;
@@ -88,13 +94,10 @@ begin
             b0_i <= (others => '0');
             b1_i <= (others => '0');
         elsif (VIN='1' and CLK'event and CLK = '1') then  -- rising clock edge           
-            a1_i <= a1;
-            b0_i <= b0;
-            b1_i <= b1;
+            a1_i <= signed(a1);
+            b0_i <= signed(b0);
+            b1_i <= signed(b1);
 
-            a1_signed <= to_integer(signed(a1_i));
-            b0_signed <= to_integer(signed(b0_i));
-            b1_signed <= to_integer(signed(b1_i));
         end if;
     end process;
 
@@ -109,25 +112,6 @@ begin
         end if;
     end process;
 
-    --################ Implementation ###################
-    
-
-
-    --TBD: METTERE TO SIGNED
-
-
-        temp_c <= to_integer(signed(a1_i) * signed(w_i));
-        result_signed <= a1_signed * 
-        temp_d <= b1_i * w_i;
-        temp_e <= b0_i * w;
-
-        c <=  temp_c(24 downto 20) & "00000000";
-        d <=  temp_d(24 downto 20) & "00000000";
-        e <=  temp_e(24 downto 20) & "00000000";
-        
-        
-        w <= x + c;      
-        y <= e + d;
 
     
 end behavioral;
