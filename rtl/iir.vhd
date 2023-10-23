@@ -32,11 +32,15 @@ architecture behavioral of iir is
     signal y   : std_logic_vector(NB -1 downto 0);
     signal w   : std_logic_vector(NB -1 downto 0);
     signal w_i : std_logic_vector(NB -1 downto 0);
+    signal w_i : std_logic_vector(NB -1 downto 0);
    
     -- Internal parameters after the registers
     signal a1_i: std_logic_vector(NB -1 downto 0);
     signal b1_i: std_logic_vector(NB -1 downto 0);
     signal b0_i: std_logic_vector(NB -1 downto 0);    
+
+    signal a1_signed, b1_signed, b0_signed, result_signed : integer;
+
 
     -- Temporary signals for storing the multiplication
     signal temp_c  : std_logic_vector(25 downto 0) := (others => '0');
@@ -87,6 +91,10 @@ begin
             a1_i <= a1;
             b0_i <= b0;
             b1_i <= b1;
+
+            a1_signed <= to_integer(signed(a1_i));
+            b0_signed <= to_integer(signed(b0_i));
+            b1_signed <= to_integer(signed(b1_i));
         end if;
     end process;
 
@@ -96,75 +104,30 @@ begin
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             w_i <= (others => '0');
-        elsif (en = '1' and CLK'event and CLK = '1') then  -- rising clock edge           
+        elsif (CLK'event and CLK = '1') then  -- rising clock edge           
             w_i <= w;
         end if;
     end process;
 
     --################ Implementation ###################
     
-    --u_filter:
-    --process (CLK, RST_N)
-    --begin
-    --    temp_c <= a1 * w_i;
-    --    temp_d <= b1 * w_i;
-    --    temp_e <= b0 * w;
-    --    
-    --    c <=  temp_c(24 downto 20) & "00000000";
-    --    d <=  temp_d(24 downto 20) & "00000000";
-    --    e <=  temp_e(24 downto 20) & "00000000";
---
-    --    w <= x + c;
-    --    y <= e + d;
-    --end process;
 
 
+    --TBD: METTERE TO SIGNED
 
-    u_fb:
-    process (CLK, RST_N)
-    begin
-        temp_c <= a1 * w_i;
-        
+
+        temp_c <= to_integer(signed(a1_i) * signed(w_i));
+        result_signed <= a1_signed * 
+        temp_d <= b1_i * w_i;
+        temp_e <= b0_i * w;
+
         c <=  temp_c(24 downto 20) & "00000000";
-
-        w <= x + c;
-
-    end process;
-
-    u_ff:
-    process (CLK, RST_N)
-    begin
-        temp_d <= a1 * w_i;
-        temp_e <= b0 * w;
-        
         d <=  temp_d(24 downto 20) & "00000000";
         e <=  temp_e(24 downto 20) & "00000000";
-
+        
+        
+        w <= x + c;      
         y <= e + d;
 
-    end process;
-    
-    --A:
-    --process(CLK, RST_n, VIN)
-    --begin
-    --    if RST_n = '0' then
-    --        sw <= (others => '0');
-    --        fb <= (others => '0');
-    --        ff <= (others => '0');
-    --        w_i <= (others => '0');
-    --        elsif (en='1' and CLK'event and CLK = '1') then  -- rising clock edge 
-    --        -- Compute feed-back and feed-forward
-    --       -- fb_temp <= sw * a1_i;
-    --       -- fb_temp2 <= fb_temp(24 downto 20) & "00000000";
-    --       -- fb <= fb - fb_temp2;
-    --        --ff_temp <= sw * b1_i;
-    --       -- ff_temp2 <= ff_temp(24 downto 20) & "00000000";
-    --        --ff <= ff + ff_temp2;
-    --        --w_i <= x + fb;
-    --        y_temp <= x * b0_i;
-    --        y <= y_temp(24 downto 20) & "00000000";
-    --        --y <= ff + y_temp2;
-    --    end if;
-    --end process;
     
 end behavioral;

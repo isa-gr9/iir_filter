@@ -40,7 +40,7 @@ begin  -- beh
   A1 <= conv_std_logic_vector(-649, NBIT);
 
   process (CLK, RST_n)
-    file fp_in : text open READ_MODE is "./samples.txt";
+    file fp_in : text open READ_MODE is "/home/riccardo/git/isa/iir_filter/tb/samples.txt";
     variable line_in : line;
     variable x : integer;
   begin  -- process
