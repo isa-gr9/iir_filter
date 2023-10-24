@@ -7,8 +7,8 @@
 #define SHAMT 20 /// shift amount
 
 const int bi0 = 1723; /// coefficient b0
-const int bi= 1723; /// b array
-const int ai= -649; /// a array
+const int bi  = 1723; /// b array
+const int ai  = -649; /// a array
 
 /// Perform fixed point filtering assuming direct form II
 ///\param x is the new input sample
