@@ -54,7 +54,6 @@ architecture behavioral of iir is
         ff_ext <= std_logic_vector(signed(sw) * signed(b1_i));
         ff     <= ff_ext(2*NB-2 downto SHAMT) & "00000000";
 
-
         w <=  std_logic_vector(unsigned(x) - unsigned(fb));
         
         temp_c <= std_logic_vector(signed(w) * signed (b0_i));
