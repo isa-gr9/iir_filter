@@ -22,20 +22,20 @@ architecture behavioral of iir is
     -- Internal signals
     signal vin_i          : std_logic;
     signal x              : std_logic_vector(NB -1 downto 0);
-    signal y              : signed(NB -1 downto 0);
-    signal w, sw          : signed(NB -1 downto 0);
-    signal fb, ff         : signed(NB -1 downto 0);
-	signal fb_ext, ff_ext : signed(2*NB -1 downto 0);
+    signal y              : std_logic_vector(NB -1 downto 0);
+    signal w, sw          : std_logic_vector(NB -1 downto 0);
+    signal fb, ff         : std_logic_vector(NB -1 downto 0);
+	signal fb_ext, ff_ext : std_logic_vector(2*NB -1 downto 0);
    
     -- Internal parameters after the registers
-    signal a1_i, b1_i, b0_i: signed(NB -1 downto 0);
+    signal a1_i, b1_i, b0_i: std_logic_vector(NB -1 downto 0);
 
-    signal temp_c  : signed(2*NB - 1 downto 0);
+    signal temp_c  : std_logic_vector(2*NB - 1 downto 0);
     signal temp_d  : signed(2*NB - 1 downto 0);
     signal temp_e  : signed(2*NB - 1 downto 0);    
     
     -- Signal that shift the multiplication output
-    signal c   : signed(NB -1 downto 0);
+    signal c   : std_logic_vector(NB -1 downto 0);
     signal d   : signed(NB -1 downto 0); 
     signal e   : signed(NB -1 downto 0);
     
@@ -48,34 +48,23 @@ architecture behavioral of iir is
         
     --################ Implementation ###################
         
-        fb_ext <= signed(sw) * signed(a1_i);
-        --fb_ext <= ((signed(sw) * signed(a1_i)) sll SHAMT) srl (SHAMT - NB + 1);
-        fb     <= fb_ext(2*NB-2 downto 2*NB-6) & "00000000";
+        fb_ext <= std_logic_vector(signed(sw) * signed(a1_i));
+        fb     <= fb_ext(2*NB-2 downto SHAMT) & "00000000";
 
-        --ff_ext <= ((signed(sw) * signed(b1_i)) sll SHAMT) srl (SHAMT - NB + 1);
-        ff_ext <= signed(sw) * signed(b1_i);
-        ff     <= ff_ext(2*NB-2 downto 2*NB-6) & "00000000";
+        ff_ext <= std_logic_vector(signed(sw) * signed(b1_i));
+        ff     <= ff_ext(2*NB-2 downto SHAMT) & "00000000";
 
-        w <= signed(x) - fb;
+
+        w <=  std_logic_vector(unsigned(x) - unsigned(fb));
         
-        temp_c <= signed(w) * signed (b0_i);
-        c <= temp_c(2*NB-2 downto 2*NB-6) & "00000000";
+        temp_c <= std_logic_vector(signed(w) * signed (b0_i));
+        c <= temp_c(2*NB-2 downto SHAMT) & "00000000";
 
-        y <= c + ff;
-        --temp_c <= a1_i * sw;
-        --temp_d <= b1_i * sw;
-        --temp_e <= b0_i * w;
-        --
-        --c <=  temp_c(2*NB-2 downto NB - 1);--temp_c(24 downto 20) & "00000000";
-        --d <=  temp_d(2*NB-2 downto NB - 1);--temp_d(24 downto 20) & "00000000";
-        --e <=  temp_e(2*NB-2 downto NB - 1);--temp_e(24 downto 20) & "00000000";
-        ----
-        --w <= signed(x) + c;      
-        --y <= e + d;
-    
+        y <= std_logic_vector(signed(c) + signed(ff));
 
     --################### Registers ################################
     
+    -- Input registers
     u_iir_reg1:
     process (CLK, RST_n)
     begin
@@ -86,43 +75,102 @@ architecture behavioral of iir is
             if (VIN = '1') then
                 vin_i <= '1';
                 x     <= DIN;
+                a1_i  <= a1;
+                b0_i  <= b0;
+                b1_i  <= b1;
             else
                 vin_i <= '0';
-                x     <= DIN;
+                x     <= (others => '0');
+                a1_i  <= a1;
+                b0_i  <= b0;
+                b1_i  <= b1;
             end if;
         end if;
     end process;
-    
-    u_iir_reg2:
+
+    -- Output registersz
+    u_rout:
     process (CLK, RST_n)
     begin
         if (RST_n = '0') then                 -- asynchronous reset (active low)
             DOUT        <= (others => '0');
-            sw         <= (others => '0');
+            --sw          <= (others => '0');
             VOUT        <= '0';
-            a1_i        <= (others => '0');
-            b0_i        <= (others => '0');
-            b1_i        <= (others => '0');
         elsif (CLK'event and CLK = '1') then  -- rising clock edge           
             if (vin_i = '1') then
                 VOUT    <= '1';
                 DOUT    <= std_logic_vector(y);
-                sw     <= signed(w);
-                a1_i    <= signed(a1);
-                b0_i    <= signed(b0);
-                b1_i    <= signed(b1);
             else
-                sw     <= signed(w);
                 VOUT    <= '0';
-                DOUT    <= std_logic_vector(y);
+                DOUT    <=  std_logic_vector(y);
             end if;
         end if;
     end process;
+            --Internal Register
+    u_reg:
+    process (CLK, RST_n)
+    begin
+        if (RST_n = '0') then                 -- asynchronous reset (active low)
+            sw <= (others => '0');
+        elsif (CLK'event and CLK = '1') then  -- rising clock edge           
+            if (vin_i = '1') then
+                sw <= w;
+            end if;
+        end if;
+    end process;
+    
+        
 
+    --###############################################################
+    --###############################################################
 
-    --iir_reg1:
+    --u_iir_reg1:
     --process (CLK, RST_n)
     --begin
+    --    if (RST_n = '0') then                 -- asynchronous reset (active low)
+    --        x     <= (others => '0');
+    --        vin_i <= '0';
+    --    elsif (CLK'event and CLK = '1') then  -- rising clock edge           
+    --        if (VIN = '1') then
+    --            vin_i <= '1';
+    --            x     <= DIN;
+    --        else
+    --            vin_i <= '0';
+    --            x     <= DIN;
+    --        end if;
+    --    end if;
+    --end process;
+    --
+    --u_iir_reg2:
+    --process (CLK, RST_n)
+    --begin
+    --    if (RST_n = '0') then                 -- asynchronous reset (active low)
+    --        DOUT        <= (others => '0');
+    --        sw          <= (others => '0');
+    --        VOUT        <= '0';
+    --        a1_i        <= (others => '0');
+    --        b0_i        <= (others => '0');
+    --        b1_i        <= (others => '0');
+    --    elsif (CLK'event and CLK = '1') then  -- rising clock edge           
+    --        if (vin_i = '1') then
+    --            VOUT    <= '1';
+    --            DOUT    <= std_logic_vector(y);
+    --            sw      <=  w;
+    --            a1_i    <= a1;
+    --            b0_i    <= b0;
+    --            b1_i    <= b1;
+    --        else
+    --            --sw      <= w;
+    --            VOUT    <= '0';
+    --            DOUT    <= y;
+    --        end if;
+    --    end if;
+    --end process;
+--
+--
+    ----iir_reg1:
+    ----process (CLK, RST_n)
+    ----begin
     --    if (RST_n = '0') then                 -- asynchronous reset (active low)
     --        x     <= (others => '0');
     --        vin_i <= '0';

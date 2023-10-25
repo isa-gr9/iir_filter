@@ -1,0 +1,50 @@
+# ERROR: No extended dataflow license exists
+# do ../scripts/gui_run.do
+# vsim work.tb_iir 
+# Start time: 17:02:33 on Oct 25,2023
+# Loading work.tb_iir
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.clk_gen(beh)
+# Loading ieee.std_logic_textio(body)
+# Loading work.data_maker(beh)
+# Loading ieee.numeric_std(body)
+# Loading work.iir(behavioral)
+# Loading work.data_sink(beh)
+# ** Error: Results are different: index=5 c=2048 HDL=-1536
+#    Time: 115 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=6 c=2048 HDL=-2048
+#    Time: 135 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=7 c=1536 HDL=1024
+#    Time: 145 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=25 c=2048 HDL=-1536
+#    Time: 575 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=26 c=2048 HDL=-2048
+#    Time: 605 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=27 c=1536 HDL=1024
+#    Time: 615 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=45 c=2048 HDL=-1536
+#    Time: 965 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=46 c=2048 HDL=-2048
+#    Time: 985 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=47 c=1536 HDL=1024
+#    Time: 1005 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=65 c=2048 HDL=-1536
+#    Time: 1305 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=66 c=2048 HDL=-2048
+#    Time: 1315 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=67 c=1536 HDL=1024
+#    Time: 1345 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=85 c=2048 HDL=-1536
+#    Time: 1745 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=86 c=2048 HDL=-2048
+#    Time: 1775 ns  Iteration: 2  Instance: /tb_iir/DS
+# ** Error: Results are different: index=87 c=1536 HDL=1024
+#    Time: 1815 ns  Iteration: 2  Instance: /tb_iir/DS
+# 0 ps
+# 2100 ns
+add wave -position 18  -autoscale 1 -format Literal -height 19 -radix decimal
+# Missing signal name or pattern.

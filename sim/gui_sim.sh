@@ -15,7 +15,7 @@ vcom ../tb/data_sink.vhd
 vlog ../tb/tb_iir.v
 
 
-vsim -do ./run.do
+vsim -do ../scripts/gui_run.do
 
 # Remove work directory
 rm -rf work
