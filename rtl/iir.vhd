@@ -37,12 +37,8 @@ architecture behavioral of iir is
     -- Internal parameters after the registers
     signal a1_i, b1_i, b0_i: std_logic_vector(NB downto 0);
     --signal a1_i, b1_i, b0_i: std_logic_vector(NB -1 downto 0);
-
-
-
     signal temp_c  : std_logic_vector(2*NB +1 downto 0);
-  
-    
+
     -- Signal that shift the multiplication output
     signal c   : std_logic_vector(NB  downto 0);
 
@@ -69,8 +65,7 @@ architecture behavioral of iir is
         y_tmp <= std_logic_vector(signed(c) + signed(ff));
         y <= y_tmp(NB-1 downto 0);
 
-
-    --################### Registers ################################
+--################### Registers ################################
     
     -- Input registers
     u_iir_reg1:
