@@ -23,24 +23,29 @@ architecture behavioral of iir is
     signal vin_i          : std_logic;
     signal x              : std_logic_vector(NB -1 downto 0);
     signal y              : std_logic_vector(NB -1 downto 0);
-    signal w, sw          : std_logic_vector(NB -1 downto 0);
-    signal fb, ff         : std_logic_vector(NB -1 downto 0);
-	signal fb_ext, ff_ext : std_logic_vector(2*NB -1 downto 0);
+
+    --14 bit 
+    signal x_tmp          : std_logic_vector(NB downto 0);
+    signal y_tmp          : std_logic_vector(NB downto 0);
+
+
+
+    signal w, sw          : std_logic_vector(NB downto 0);
+    signal fb, ff         : std_logic_vector(NB downto 0);
+	signal fb_ext, ff_ext : std_logic_vector(2*NB+1 downto 0);
    
     -- Internal parameters after the registers
-    signal a1_i, b1_i, b0_i: std_logic_vector(NB -1 downto 0);
+    signal a1_i, b1_i, b0_i: std_logic_vector(NB downto 0);
+    --signal a1_i, b1_i, b0_i: std_logic_vector(NB -1 downto 0);
 
-    signal temp_c  : std_logic_vector(2*NB - 1 downto 0);
-    signal temp_d  : signed(2*NB - 1 downto 0);
-    signal temp_e  : signed(2*NB - 1 downto 0);    
+
+
+    signal temp_c  : std_logic_vector(2*NB +1 downto 0);
+  
     
     -- Signal that shift the multiplication output
-    signal c   : std_logic_vector(NB -1 downto 0);
-    signal d   : signed(NB -1 downto 0); 
-    signal e   : signed(NB -1 downto 0);
-    
+    signal c   : std_logic_vector(NB  downto 0);
 
-    signal en : std_logic := '1';
     
     
     begin
@@ -50,17 +55,20 @@ architecture behavioral of iir is
         
     
         fb_ext <= std_logic_vector(signed(sw) * signed(a1_i));
-        fb     <= fb_ext(2*NB-2 downto SHAMT) & "00000000";
+        fb     <= fb_ext(2*NB-2) & fb_ext(2*NB-2 downto SHAMT) & "00000000";
 
         ff_ext <= std_logic_vector(signed(sw) * signed(b1_i));
-        ff     <= ff_ext(2*NB-2 downto SHAMT) & "00000000";
+        ff     <= ff_ext(2*NB-2) & ff_ext(2*NB-2 downto SHAMT) & "00000000";
 
-        w <=  std_logic_vector(signed(x) - signed(fb));
+        x_tmp <= x(NB-1) & x;
+        w <=  std_logic_vector(signed(x_tmp) - signed(fb));
         
         temp_c <= std_logic_vector(signed(w) * signed (b0_i));
-        c <= temp_c(2*NB-2 downto SHAMT) & "00000000";
+        c <= temp_c(2*NB-2) & temp_c(2*NB-2 downto SHAMT) & "00000000";
 
-        y <= std_logic_vector(signed(c) + signed(ff));
+        y_tmp <= std_logic_vector(signed(c) + signed(ff));
+        y <= y_tmp(NB-1 downto 0);
+
 
     --################### Registers ################################
     
@@ -75,15 +83,15 @@ architecture behavioral of iir is
             if (VIN = '1') then
                 vin_i <= '1';
                 x     <= DIN;
-                a1_i  <= a1;
-                b0_i  <= b0;
-                b1_i  <= b1;
+                a1_i  <= a1(NB-1) & a1;
+                b0_i  <= b0(NB-1) & b0;
+                b1_i  <= b1(NB-1) & b1;
             else
                 vin_i <= '0';
                 x     <= (others => '0');
-                a1_i  <= a1;
-                b0_i  <= b0;
-                b1_i  <= b1;
+                a1_i  <= a1(NB-1) & a1;
+                b0_i  <= b0(NB-1) & b0;
+                b1_i  <= b1(NB-1) & b1;
             end if;
         end if;
     end process;
