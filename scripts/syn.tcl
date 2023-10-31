@@ -47,14 +47,14 @@ file mkdir $libDir
 define_design_lib $active_design -path $libDir
 
 
-analyze -f vhdl -library WORK ../rtl/${active_design}.vhd
+analyze -f vhdl -library WORK ../rtl/${active_design}.vhd > ${dirname}/${active_design}_analyze.txt
 
 #Preserve rtl names for make the power consumption estimation easier
 set power_preserve_rtl_hier_names true
 
 
 # Elaborate design
-elaborate iir -arch behavioral -lib WORK
+elaborate iir -arch behavioral -lib WORK > ${dirname}/${active_design}_elaborate.txt
 
 
 ######################################################################
@@ -63,3 +63,53 @@ elaborate iir -arch behavioral -lib WORK
 ##
 ######################################################################
 source "./${blockName}.sdc"
+
+
+#####################################################################
+# COMPILE1
+#####################################################################
+
+compile_ultra
+
+#TBD: Apply the clock gating
+
+#####################################################################
+# Reports
+#####################################################################
+
+# SET REPORT FILE NAME
+set timing_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
+set power_rpt_noopt "${dirname}/${active_design}_postsyn_power_noopt.rpt"
+set clk_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
+set area_rpt "${dirname}/${active_design}_postsyn_area.rpt"
+
+# Report the properties of the clock just created
+report_clock > $clk_rpt
+# TIMING REPORT
+report_timing > $timing_rpt
+# POWER REPORT
+report_power > $power_rpt_noopt
+
+
+#####################################################################
+# 
+#   SAVE DESIGN
+#
+#####################################################################
+
+#Erase the hierarchy
+ungroup -all -flatten
+
+#Imposing verilog rules to obtain a verilog netlist
+change_names -hierarchy -rules verilog
+
+
+#Delay of the netlist
+write_sdf "${dirname}/${active_design}.sdf"
+#Netlist
+write -format verilog -hierarchy -output "${dirname}/${active_design}_postsyn_netlist.v"
+#design constraints
+write_sdc "${dirname}/${active_design}.sdc"
+
+exec rm -rf $libDir
+exit

@@ -10,7 +10,7 @@ set clockSys  "CLK_SYS"
 set clockPeriod "10"
 
 
-;# Set-up Clock
+# Set-up Clock
 create_clock -name $clockSys -period $clockPeriod $clockName
 
 #Don't touch property highlighting that is a special signal in the design
@@ -20,21 +20,12 @@ set_dont_touch_network $clockSys
 set_clock_uncertainty 0.07 [get_clocks $clockSys]
 
 
-
+#Set input and output delay
+#input must be lower than the clock period
 set_input_delay 0.5 -max -clock $clockSys [remove_from_collection [all_inputs] CLK]
+set_output_delay 0.5 -clock $clockSys [all_outputs]
 
 
-;# fix hold constraints
-set_min_delay 0.20 -from [all_inputs] -to [all_outputs]
-
-;# Set-up IOs
-set_driving_cell -library "CORE65LPLVT_nom_1.20V_25C.db:CORE65LPLVT" -lib_cell "HS65_LL_BFX7" [all_inputs]
-
-set_input_delay 0.15 -clock $clockName [all_inputs]
-set_output_delay 0.15 -clock $clockName [all_outputs]
-
-set max_transition_time 0.1
-set_max_transition $max_transition_time [all_outputs]
-
-;# Set area constraint
-set_max_area 0
+# Setting the load of all the outputs to a buffer taken from the tech lib 
+set outputload [load_of NangateOpenCellLibrary/BUF_X4/A]
+set_load $outputload [all_outputs]
