@@ -17,7 +17,7 @@ end iir;
         
 architecture behavioral of iir is
     constant SHAMT           :    positive := 20;  -- Shift amount
-    constant NB              :    positive := 13;  -- Shift amount
+    constant NB              :    positive := 13;  -- number of bits
     constant NB_MUL          :    positive := 28;
     
     -- Internal signals
@@ -32,7 +32,7 @@ architecture behavioral of iir is
     signal fb, ff            :    std_logic_vector(NB downto 0);
 	signal fb_ext, ff_ext    :    std_logic_vector(NB_MUL - 1 downto 0);
    
-     signal c_ext  : std_logic_vector(2*NB +1 downto 0);
+    signal c_ext  : std_logic_vector(2*NB +1 downto 0);
 
     -- Signal that shift the multiplication output
     signal c   : std_logic_vector(NB  downto 0);
