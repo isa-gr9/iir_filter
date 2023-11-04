@@ -12,7 +12,8 @@ end clk_gen;
 
 architecture beh of clk_gen is
 
-  constant Ts : time := 10 ns;
+  -- Clock at the minimum period possible
+  constant Ts : time := 2.4 ns;
   
   signal CLK_i : std_logic := '1';
   

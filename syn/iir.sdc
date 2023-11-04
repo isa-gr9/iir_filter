@@ -7,7 +7,11 @@ set clockName "CLK"
 set clockSys  "CLK_SYS"
 
 # Period measured in nanoseconds. So for a 100MHz frequency, 10 ns are selected
-set clockPeriod "10"
+#set clockPeriod "10"
+
+# Max frequency (min period)
+set clockPeriod "2.4"
+
 
 
 # Set-up Clock

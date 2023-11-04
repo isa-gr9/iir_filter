@@ -89,6 +89,8 @@ report_clock > $clk_rpt
 report_timing > $timing_rpt
 # POWER REPORT
 report_power > $power_rpt_noopt
+# AREA REPORT
+report_area > $area_rpt
 
 
 #####################################################################
@@ -112,4 +114,6 @@ write -format verilog -hierarchy -output "${dirname}/${active_design}_postsyn_ne
 write_sdc "${dirname}/${active_design}.sdc"
 
 exec rm -rf $libDir
+exec rm -rf ./alib-52
+exec rm default.svf command.log 
 exit
