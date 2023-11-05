@@ -4,7 +4,7 @@
 #define N 1 /// order of the filter
 #define NTm1 (N) /// number of coeffients minus one (equal to the order)
 #define NB 13  /// number of bits
-#define SHAMT 19 /// shift amount
+#define SHAMT 20 /// shift amount
 
 const int bi0 = 1723; /// coefficient b0
 const int bi  = 1723; /// b array
@@ -20,6 +20,7 @@ int myfilter(int x)
   int i; /// index
   int w, a, b, c, d, e, f, g, s; /// intermediate value (w)
   int y; /// output sample
+  int fb, ff;
 
   /// clean the buffer
   if (first_run == 0)
@@ -39,21 +40,24 @@ int myfilter(int x)
 
 
   /// compute feed-back and feed-forward
-//  fb=ff1=ff2=0;
-  for(i=0; i<NTm1; i++)
-  {
-    w = sw1[i] + sw3[i];
-    a = ((sw2[i]*ai) >> SHAMT) << (SHAMT-NB+1);
-    c = ((sw2[i]*s) >> SHAMT) << (SHAMT-NB+1);
-    d = sw5[i]+sw4[i];
-    e = sw6[i];
-    f = sw7[i];
-    g = ((sw2[i]*bi0) >> SHAMT) << (SHAMT-NB+1);
-    y = sw9[i] + sw8[i];
-  }
-  /// compute intermediate value (w) and output sample
+  fb=ff=0;
+  //Evaluate values indepent from the registers
   b = ((x*bi) >> SHAMT) << (SHAMT-NB+1);
   s = ((ai*bi) >> SHAMT) << (SHAMT-NB+1);
+  //feedback
+  w = sw1[0]-sw3[0];
+  a = ((sw2[0]*ai) >> SHAMT) << (SHAMT-NB+1);
+  fb -= sw3[0];
+  //feedforward
+  c = ((sw2[0]*s) >> SHAMT) << (SHAMT-NB+1);
+  d = sw5[0]+sw4[0];
+  e = sw6[0];
+  f = sw7[0];
+  g = ((sw2[0]*bi0) >> SHAMT) << (SHAMT-NB+1);
+  y = sw9[0];
+  ff += sw8[0];
+  //Output value
+  y += ff;
 
   /// update the shift register
   for (i=NTm1; i>0; i--)
