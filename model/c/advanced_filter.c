@@ -15,10 +15,10 @@ const int ai  = -649; /// a array
 ///\return the new output sample
 int myfilter(int x)
 {
-  static int sw1[4], sw2[4], sw3[4], sw4[4], sw5[4], sw6[4], sw7[4], sw8[4], sw9[4], sw10[4],sw11[4], sw12[4];/// w shift register
+  static int sw1[4], sw2[4], sw3[4], sw4[4], sw5[4], sw6[4], sw7[4], sw8[4], sw9[4], sw10[4];/// w shift register
   static int first_run = 0; /// for cleaning the shift register
   int i; /// index
-  int a, b, c, d, e, f, g, h, j, s, m; 
+  int c, d, e, w, f, g, w1, s, e1, f1; 
   int y; /// output sample
   int fb, ff1, ff2;
 
@@ -37,37 +37,32 @@ int myfilter(int x)
       sw8[i] = 0;
       sw9[i] = 0;
       sw10[i] = 0;
-      sw11[i] = 0;
-      sw12[i] = 0;
   }
 
 
   // compute feed-back and feed-forward
   fb=ff1=ff2=0;
   //feedforward 1
-  a = ((sw1[0]*ai) >> SHAMT) << (SHAMT-NB+1);
+  c = ((sw1[0]*ai) >> SHAMT) << (SHAMT-NB+1);
   ff1 += sw2[0];
-
-  b = sw1[0]-ff1;
-  c = sw3[0]+fb;
-
+  d = sw1[0]-ff1;
+  
+  w = sw3[0]+fb;
   //feedback
-  //d = sw4[0];
+  w1 = sw4[0];
   s = ((ai*ai) >> SHAMT) << (SHAMT-NB+1);
   e = ((sw5[0]*s) >> SHAMT) << (SHAMT-NB+1);
-  f = sw6[0];
+  e1 = sw6[0];
   fb -= sw7[0];
 
   //feedforward 2
-  g = ((sw4[0]*bi) >> SHAMT) << (SHAMT-NB+1);
-  h = sw8[0];
-  j = sw9[0];
-  e = sw10[0];
-  ff2 += sw11[0];
-  m = ((sw4[0]*bi0) >> SHAMT) << (SHAMT-NB+1);
-  y = sw12[0];
+  f = ((w1*bi) >> SHAMT) << (SHAMT-NB+1);
+  f1 = sw8[0];
+  ff2 += sw9[0];
 
-  //Output
+  g = ((w1*bi0) >> SHAMT) << (SHAMT-NB+1);
+  y = sw10[0];
+
   y += ff2;
 
   /// update the shift register
@@ -77,19 +72,19 @@ int myfilter(int x)
 
   for (i=NTm1; i>0; i--)
     sw2[i] = sw2[i-1];
-  sw2[0] = a;
+  sw2[0] = c;
 
   for (i=NTm1; i>0; i--)
     sw3[i] = sw3[i-1];
-  sw3[0] = b;
+  sw3[0] = d;
 
   for (i=NTm1; i>0; i--)
     sw4[i] = sw4[i-1];
-  sw4[0] = c;
+  sw4[0] = w;
 
   for (i=NTm1; i>0; i--)
     sw5[i] = sw5[i-1];
-  sw5[0] = c;
+  sw5[0] = w1;
  
   for (i=NTm1; i>0; i--)
     sw6[i] = sw6[i-1];
@@ -97,27 +92,19 @@ int myfilter(int x)
 
   for (i=NTm1; i>0; i--)
     sw7[i] = sw7[i-1];
-  sw7[0] = f;
+  sw7[0] = e1;
 
   for (i=NTm1; i>0; i--)
     sw8[i] = sw8[i-1];
-  sw8[0] = g;
+  sw8[0] = f;
 
   for (i=NTm1; i>0; i--)
     sw9[i] = sw9[i-1];
-  sw9[0] = h;
+  sw9[0] = f1;
 
   for (i=NTm1; i>0; i--)
     sw10[i] = sw10[i-1];
-  sw9[0] = j;
-
-  for (i=NTm1; i>0; i--)
-    sw11[i] = sw11[i-1];
-  sw11[0] = e;
-
-  for (i=NTm1; i>0; i--)
-    sw12[i] = sw12[i-1];
-  sw12[0] = m;
+  sw10[0] = g;
 
 return y;
   
