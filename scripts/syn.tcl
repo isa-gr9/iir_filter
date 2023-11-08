@@ -5,7 +5,7 @@
 ######################################################################
 
 #Source setup files
-source ../scripts/.synopsys_dc.setup
+source ./.synopsys_dc.setup
 
 
 # SUPPRESS WARNING MESSAGES
@@ -42,27 +42,27 @@ if {![file exists $dirname]} {
 	file mkdir $dirname
 }
 
-set libDir "./work"
+set libDir "./work/"
 file mkdir $libDir
 define_design_lib $active_design -path $libDir
 
 
-analyze -f vhdl -library WORK ../rtl/${active_design}.vhd > ${dirname}/${active_design}_analyze.txt
+analyze -format vhdl -library $active_design ../rtl/${active_design}.vhd > ${dirname}/${active_design}_analyze.txt
 
 #Preserve rtl names for make the power consumption estimation easier
 set power_preserve_rtl_hier_names true
 
 
 # Elaborate design
-elaborate iir -arch behavioral -lib WORK > ${dirname}/${active_design}_elaborate.txt
-
+#elaborate $active_design -arch behavioral -lib WORK > ${dirname}/${active_design}_elaborate.txt
+elaborate -lib $active_design $active_design > ${dirname}/${active_design}_elaborate.txt
 
 ######################################################################
 ##
 ## SET DESIGN CONSTRAINTS
 ##
 ######################################################################
-source "./${blockName}.sdc"
+source "./${active_design}.sdc"
 
 
 #####################################################################
@@ -89,6 +89,8 @@ report_clock > $clk_rpt
 report_timing > $timing_rpt
 # POWER REPORT
 report_power > $power_rpt_noopt
+# AREA REPORT
+report_area > $area_rpt
 
 
 #####################################################################
@@ -112,4 +114,6 @@ write -format verilog -hierarchy -output "${dirname}/${active_design}_postsyn_ne
 write_sdc "${dirname}/${active_design}.sdc"
 
 exec rm -rf $libDir
+exec rm -rf ./alib-52
+exec rm default.svf command.log 
 exit
