@@ -18,6 +18,8 @@ suppress_message UID-401
 suppress_message ENV-003
 suppress_message UITE-489
 suppress_message CMD-041
+
+
 ######################################################################
 ##
 ## READ DESIGN
@@ -37,6 +39,7 @@ set slack_max "${dirname}/${active_design}_postsyn_slackmax.rpt"
 
 # READ
 read_verilog $in_verilog_filename
+link_design $active_design
 read_sdc -version 1.3 $in_sdc_filename
 
 

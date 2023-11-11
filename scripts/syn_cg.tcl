@@ -66,11 +66,11 @@ source "./${active_design}.sdc"
 
 
 #####################################################################
-# COMPILE1
+# COMPILE
 #####################################################################
 
-# compile
-source " => /scripts/clock_gating.tcl"
+# compile witch clock gate
+source ../scripts/clock_gating.tcl
 compile_ultra -gate_clock
 set_dont_retime [all_fanout -from [get_pins -filter is_clock_gate_output_pin] -only_cells]
 
@@ -79,12 +79,11 @@ set_dont_retime [all_fanout -from [get_pins -filter is_clock_gate_output_pin] -o
 # Reports
 #####################################################################
 
-# SET REPORT FILE NAME
+# SET REPORTs FILE NAME
 set timing_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
 set power_rpt_noopt "${dirname}/${active_design}_postsyn_power_noopt.rpt"
 set clk_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
 set area_rpt "${dirname}/${active_design}_postsyn_area.rpt"
-
 set cg "${dirname}/${active_design}_clkgat.rpt"
 set cg_str "${dirname}/${active_design}_clkgat_str.rpt"
 set cg_cond "${dirname}/${active_design}_clkgat_cond.rpt"
