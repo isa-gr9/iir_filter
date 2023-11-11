@@ -37,7 +37,7 @@ set active_design "iir"
 
 
 # DEFINE WORK DIRS
-set dirname "./results/${active_design}"
+set dirname "./results/${active_design}/syn"
 if {![file exists $dirname]} {
 	file mkdir $dirname
 }
@@ -69,9 +69,11 @@ source "./${active_design}.sdc"
 # COMPILE1
 #####################################################################
 
-compile_ultra
+# compile
+source " => /scripts/clock_gating.tcl"
+compile_ultra -gate_clock
+set_dont_retime [all_fanout -from [get_pins -filter is_clock_gate_output_pin] -only_cells]
 
-#TBD: Apply the clock gating
 
 #####################################################################
 # Reports
@@ -83,6 +85,10 @@ set power_rpt_noopt "${dirname}/${active_design}_postsyn_power_noopt.rpt"
 set clk_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
 set area_rpt "${dirname}/${active_design}_postsyn_area.rpt"
 
+set cg "${dirname}/${active_design}_clkgat.rpt"
+set cg_str "${dirname}/${active_design}_clkgat_str.rpt"
+set cg_cond "${dirname}/${active_design}_clkgat_cond.rpt"
+
 # Report the properties of the clock just created
 report_clock > $clk_rpt
 # TIMING REPORT
@@ -91,6 +97,12 @@ report_timing > $timing_rpt
 report_power > $power_rpt_noopt
 # AREA REPORT
 report_area > $area_rpt
+
+
+report_clock_gating  > $cg
+report_clock_gating -structure   > $cg_str
+report_clock_gating -enable_conditions  > $cg_cond
+
 
 #####################################################################
 # 
