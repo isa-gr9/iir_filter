@@ -1,7 +1,6 @@
 #!/bin/sh
- 
-#If you run on the server this script, uncomment the line below
-#source /eda/scripts/init_questa_core_prime
+
+source /eda/scripts/init_questa_core_prime
 
 set -e
 

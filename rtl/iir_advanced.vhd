@@ -175,9 +175,6 @@ fb_reg2:
         end if;
     end process;
 
-
-
-
 ff2_reg1:
     process (CLK, RST_n)
     begin
@@ -233,17 +230,17 @@ ff2_reg3:
      
 
     -- Take just the bit needed
-    a2     <= a2_ext(2*NB -2) & a2_ext(2*NB-2 downto SHAMT) & "00000000";
-    c     <= c_ext(2*NB-2) & c_ext(2*NB-2 downto SHAMT) & "00000000";    
-    e     <= e_ext(2*NB-2) & e_ext(2*NB-2 downto SHAMT) & "00000000";
-    f     <= f_ext(2*NB-2) & f_ext(2*NB-2 downto SHAMT) & "00000000";    
-    g     <= g_ext(2*NB-2) & g_ext(2*NB-2 downto SHAMT) & "00000000";    
+    a2    <= a2_ext(2*NB-2) & a2_ext(2*NB-2 downto SHAMT) & "00000000";
+    c     <= c_ext(2*NB-2)  & c_ext(2*NB-2 downto SHAMT)  & "00000000";    
+    e     <= e_ext(2*NB-2)  & e_ext(2*NB-2 downto SHAMT)  & "00000000";
+    f     <= f_ext(2*NB-2)  & f_ext(2*NB-2 downto SHAMT)  & "00000000";    
+    g     <= g_ext(2*NB-2)  & g_ext(2*NB-2 downto SHAMT)  & "00000000";    
 
 
     -- Computation at 14 bit
     d      <=  std_logic_vector(signed(x_1) - signed(c_1));
     w      <=  std_logic_vector(signed(d_1) + signed(e_2));
-    y_tmp  <= std_logic_vector(signed(g_1) + signed(f_2));
+    y_tmp  <=  std_logic_vector(signed(g_1) + signed(f_2));
 
 
     -- Output at 13 bit

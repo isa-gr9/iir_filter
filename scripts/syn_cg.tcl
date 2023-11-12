@@ -80,10 +80,10 @@ set_dont_retime [all_fanout -from [get_pins -filter is_clock_gate_output_pin] -o
 #####################################################################
 
 # SET REPORTs FILE NAME
-set timing_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
-set power_rpt_noopt "${dirname}/${active_design}_postsyn_power_noopt.rpt"
-set clk_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
-set area_rpt "${dirname}/${active_design}_postsyn_area.rpt"
+set timing_rpt "${dirname}/${active_design}_postsyn_timing_cg.rpt"
+set power_rpt_noopt "${dirname}/${active_design}_postsyn_power_noopt_cg.rpt"
+set clk_rpt "${dirname}/${active_design}_postsyn_timing_cg.rpt"
+set area_rpt "${dirname}/${active_design}_postsyn_area_cg.rpt"
 set cg "${dirname}/${active_design}_clkgat.rpt"
 set cg_str "${dirname}/${active_design}_clkgat_str.rpt"
 set cg_cond "${dirname}/${active_design}_clkgat_cond.rpt"
@@ -117,11 +117,11 @@ change_names -hierarchy -rules verilog
 
 
 #Delay of the netlist
-write_sdf "${dirname}/${active_design}.sdf"
+write_sdf "${dirname}/${active_design}_cg.sdf"
 #Netlist
-write -format verilog -hierarchy -output "${dirname}/${active_design}_postsyn_netlist.v"
+write -format verilog -hierarchy -output "${dirname}/${active_design}_postsyn_netlist_cg.v"
 #design constraints
-write_sdc "${dirname}/${active_design}.sdc"
+write_sdc "${dirname}/${active_design}_cg.sdc"
 
 
 exec rm -rf $libDir
