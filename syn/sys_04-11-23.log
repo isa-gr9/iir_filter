@@ -1,0 +1,388 @@
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+               Version S-2021.06-SP4 for linux64 - Nov 23, 2021 
+
+                    Copyright (c) 1988 - 2021 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+######################################################################
+##
+## SPECIFY LIBRARIES
+##
+######################################################################
+#Source setup files
+source ./.synopsys_dc.setup
+dw_foundation.sldb
+# SUPPRESS WARNING MESSAGES
+suppress_message MWLIBP-319
+suppress_message MWLIBP-324
+suppress_message TFCHK-012
+suppress_message TFCHK-014
+suppress_message TFCHK-049
+suppress_message TFCHK-072
+suppress_message TFCHK-084
+suppress_message PSYN-651
+suppress_message PSYN-650
+suppress_message UID-401
+suppress_message LINK-14
+suppress_message TIM-134
+suppress_message VER-130
+suppress_message UISN-40
+suppress_message VO-4
+suppress_message RTDC-126
+######################################################################
+##
+## READ DESIGN
+##
+######################################################################
+# Set the design to synthesize
+set active_design "iir"
+iir
+# DEFINE WORK DIRS
+set dirname "./results/${active_design}"
+./results/iir
+if {![file exists $dirname]} {
+	file mkdir $dirname
+}
+set libDir "./work/"
+./work/
+file mkdir $libDir
+define_design_lib $active_design -path $libDir
+1
+analyze -format vhdl -library $active_design ../rtl/${active_design}.vhd > ${dirname}/${active_design}_analyze.txt
+#Preserve rtl names for make the power consumption estimation easier
+set power_preserve_rtl_hier_names true
+true
+# Elaborate design
+#elaborate $active_design -arch behavioral -lib WORK > ${dirname}/${active_design}_elaborate.txt
+elaborate -lib $active_design $active_design > ${dirname}/${active_design}_elaborate.txt
+######################################################################
+##
+## SET DESIGN CONSTRAINTS
+##
+######################################################################
+source "./${active_design}.sdc"
+1
+#####################################################################
+# COMPILE1
+#####################################################################
+compile_ultra
+Information: Performing power optimization. (PWR-850)
+Analyzing: "/eda/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db"
+Library analysis succeeded.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | S-2021.06-DWBB_202106.4 |     *     |
+| Licensed DW Building Blocks        | S-2021.06-DWBB_202106.4 |     *     |
+============================================================================
+
+============================================================================
+| Flow Information                                                         |
+----------------------------------------------------------------------------
+| Flow         | Design Compiler WLM                                       |
+============================================================================
+| Design Information                                      | Value          |
+============================================================================
+| Number of Scenarios                                     | 0              |
+| Leaf Cell Count                                         | 96             |
+| Number of User Hierarchies                              | 0              |
+| Sequential Cell Count                                   | 85             |
+| Macro Count                                             | 0              |
+| Number of Power Domains                                 | 0              |
+| Design with UPF Data                                    | false          |
+============================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+  Simplifying Design 'iir'
+
+Loaded alib file './alib-52/NangateOpenCellLibrary_typical_ecsm_nowlm.db.alib'
+  Building model 'DW01_NAND2'
+Information: Ungrouping 0 of 1 hierarchies before Pass 1 (OPT-775)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'iir'
+Information: The register 'DOUT_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'DOUT_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: In design 'iir', the register 'a1_i_reg[13]' is removed because it is merged to 'a1_i_reg[12]'. (OPT-1215)
+Information: In design 'iir', the register 'b1_i_reg[13]' is removed because it is merged to 'b1_i_reg[12]'. (OPT-1215)
+Information: In design 'iir', the register 'x_reg[13]' is removed because it is merged to 'x_reg[12]'. (OPT-1215)
+Information: In design 'iir', the register 'b0_i_reg[13]' is removed because it is merged to 'b0_i_reg[12]'. (OPT-1215)
+ Implement Synthetic for 'iir'.
+Information: Added key list 'DesignWare' to design 'iir'. (DDB-72)
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:12    2748.8      0.00       0.0     119.1                           65303.1953
+    0:00:12    2744.3      0.00       0.0     119.1                           65168.7422
+
+  Beginning Constant Register Removal
+  -----------------------------------
+    0:00:12    2744.3      0.00       0.0     119.1                           65168.7422
+    0:00:12    2744.3      0.00       0.0     119.1                           65168.7422
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+  Selecting critical implementations
+  Mapping 'iir_DW_mult_tc_0'
+  Mapping 'iir_DW_mult_tc_1'
+  Mapping 'iir_DW_mult_tc_2'
+  Mapping 'iir_DW_mult_tc_3'
+
+  Beginning Isolate Ports
+  -----------------------
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:15    2793.8      0.00       0.0     726.6                           61939.5703
+    0:00:15    2793.8      0.00       0.0     726.6                           61939.5703
+    0:00:15    2793.8      0.00       0.0     726.6                           61939.5703
+    0:00:16    2787.7      0.00       0.0     703.0                           61788.9688
+    0:00:18    2783.7      0.00       0.0     695.1                           61670.4336
+    0:00:18    2781.6      0.00       0.0     700.1                           61619.0156
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:21    2706.8      0.00       0.0     577.3                           58939.8359
+    0:00:21    2706.8      0.00       0.0     577.3                           58939.8359
+    0:00:21    2706.8      0.00       0.0     577.3                           58939.8359
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:21    2587.1      0.00       0.0     319.4                           54553.4336
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+    0:00:22    2578.3      0.00       0.0       0.0                           54275.1367
+    0:00:22    2578.3      0.00       0.0       0.0                           54275.1367
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:22    2578.3      0.00       0.0       0.0                           54275.1367
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+  Global Optimization (Phase 43)
+  Global Optimization (Phase 44)
+  Global Optimization (Phase 45)
+  Global Optimization (Phase 46)
+  Global Optimization (Phase 47)
+  Global Optimization (Phase 48)
+  Global Optimization (Phase 49)
+    0:00:22    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:22    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:22    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:23    2529.7      0.00       0.0       0.0                           52541.0117
+    0:00:24    2529.4      0.00       0.0       0.0                           52552.0781
+Loading db file '/eda/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+1
+#TBD: Apply the clock gating
+#####################################################################
+# Reports
+#####################################################################
+# SET REPORT FILE NAME
+set timing_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
+./results/iir/iir_postsyn_timing.rpt
+set power_rpt_noopt "${dirname}/${active_design}_postsyn_power_noopt.rpt"
+./results/iir/iir_postsyn_power_noopt.rpt
+set clk_rpt "${dirname}/${active_design}_postsyn_timing.rpt"
+./results/iir/iir_postsyn_timing.rpt
+set area_rpt "${dirname}/${active_design}_postsyn_area.rpt"
+./results/iir/iir_postsyn_area.rpt
+# Report the properties of the clock just created
+report_clock > $clk_rpt
+# TIMING REPORT
+report_timing > $timing_rpt
+# POWER REPORT
+report_power > $power_rpt_noopt
+# Area
+report_area > $area_rpt
+#####################################################################
+# 
+#   SAVE DESIGN
+#
+#####################################################################
+#Erase the hierarchy
+ungroup -all -flatten
+Warning: Design has no hierarchy.  No cells can be ungrouped. (UID-228)
+0
+#Imposing verilog rules to obtain a verilog netlist
+change_names -hierarchy -rules verilog
+Warning: In the design iir, net 'DOUT[7]' is connecting multiple ports. (UCN-1)
+1
+#Delay of the netlist
+write_sdf "${dirname}/${active_design}.sdf"
+Information: Annotated 'cell' delays are assumed to include load delay. (UID-282)
+Information: Writing timing information to file '/home/isa09_2023_2024/lab1/syn/results/iir/iir.sdf'. (WT-3)
+1
+#Netlist
+write -format verilog -hierarchy -output "${dirname}/${active_design}_postsyn_netlist.v"
+Writing verilog file '/home/isa09_2023_2024/lab1/syn/results/iir/iir_postsyn_netlist.v'.
+1
+#design constraints
+write_sdc "${dirname}/${active_design}.sdc"
+1
+exec rm -rf $libDir
+exec rm -rf ./alib-52
+exec rm default.svf command.log 
+exit
+
+Memory usage for this session 220 Mbytes.
+Memory usage for this session including child processes 220 Mbytes.
+CPU usage for this session 154 seconds ( 0.04 hours ).
+Elapsed time for this session 159 seconds ( 0.04 hours ).
+
+Thank you...

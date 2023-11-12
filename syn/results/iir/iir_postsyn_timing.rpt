@@ -1,0 +1,103 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : iir
+Version: S-2021.06-SP4
+Date   : Sat Nov  4 18:57:46 2023
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: sw_reg[3] (rising edge-triggered flip-flop clocked by CLK_SYS)
+  Endpoint: DOUT_reg[12]
+            (rising edge-triggered flip-flop clocked by CLK_SYS)
+  Path Group: CLK_SYS
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  iir                5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLK_SYS (rise edge)                0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  sw_reg[3]/CK (DFFR_X1)                   0.00       0.00 r
+  sw_reg[3]/QN (DFFR_X1)                   0.13       0.13 f
+  U326/ZN (INV_X1)                         0.15       0.28 r
+  U327/ZN (INV_X1)                         0.10       0.38 f
+  U328/ZN (OAI22_X1)                       0.07       0.45 r
+  U170/ZN (INV_X1)                         0.04       0.49 f
+  U171/ZN (INV_X1)                         0.10       0.59 r
+  U329/ZN (OAI221_X1)                      0.07       0.66 f
+  U156/ZN (INV_X1)                         0.04       0.70 r
+  U157/ZN (INV_X1)                         0.05       0.75 f
+  U550/ZN (AOI221_X1)                      0.10       0.85 r
+  U551/ZN (INV_X1)                         0.02       0.87 f
+  U552/ZN (OAI21_X1)                       0.04       0.91 r
+  U553/S (HA_X1)                           0.08       0.99 r
+  U578/S (FA_X1)                           0.12       1.11 f
+  U580/ZN (NOR2_X1)                        0.04       1.15 r
+  U582/ZN (OAI21_X1)                       0.03       1.18 f
+  U583/ZN (AOI222_X1)                      0.11       1.30 r
+  U588/ZN (OAI21_X1)                       0.04       1.34 f
+  U589/ZN (AOI222_X1)                      0.10       1.44 r
+  U598/ZN (OAI21_X1)                       0.04       1.48 f
+  U599/ZN (AOI222_X1)                      0.10       1.58 r
+  U601/ZN (OAI21_X1)                       0.04       1.62 f
+  U602/ZN (AOI222_X1)                      0.11       1.74 r
+  U607/ZN (OAI21_X1)                       0.04       1.78 f
+  U608/ZN (AOI222_X1)                      0.11       1.89 r
+  U613/ZN (OAI21_X1)                       0.04       1.93 f
+  U614/ZN (AOI222_X1)                      0.11       2.04 r
+  U619/ZN (OAI21_X1)                       0.04       2.08 f
+  U620/ZN (AOI222_X1)                      0.11       2.19 r
+  U625/ZN (OAI21_X1)                       0.04       2.23 f
+  U644/CO (FA_X1)                          0.09       2.32 f
+  U885/S (FA_X1)                           0.13       2.45 r
+  U886/ZN (INV_X1)                         0.02       2.47 f
+  intadd_5/U5/CO (FA_X1)                   0.10       2.57 f
+  intadd_5/U4/S (FA_X1)                    0.18       2.75 r
+  U239/ZN (XNOR2_X1)                       0.08       2.83 r
+  U114/ZN (OAI22_X1)                       0.04       2.88 f
+  U845/CO (FA_X1)                          0.11       2.99 f
+  U847/CO (FA_X1)                          0.10       3.09 f
+  U848/CO (FA_X1)                          0.09       3.18 f
+  U849/CO (FA_X1)                          0.09       3.27 f
+  U850/CO (FA_X1)                          0.09       3.36 f
+  U851/CO (FA_X1)                          0.09       3.45 f
+  U852/CO (FA_X1)                          0.09       3.54 f
+  U853/CO (FA_X1)                          0.09       3.63 f
+  U854/CO (FA_X1)                          0.09       3.72 f
+  U855/CO (FA_X1)                          0.09       3.81 f
+  U1235/CO (FA_X1)                         0.09       3.90 f
+  U864/CO (FA_X1)                          0.09       4.00 f
+  U889/CO (FA_X1)                          0.09       4.09 f
+  U1242/S (FA_X1)                          0.13       4.22 r
+  U865/ZN (INV_X1)                         0.02       4.24 f
+  intadd_7/U2/CO (FA_X1)                   0.10       4.34 f
+  U1252/ZN (XNOR2_X1)                      0.06       4.40 f
+  U1253/ZN (XNOR2_X1)                      0.06       4.46 f
+  U1254/ZN (XNOR2_X1)                      0.06       4.52 f
+  DOUT_reg[12]/D (DFFR_X1)                 0.01       4.52 f
+  data arrival time                                   4.52
+
+  clock CLK_SYS (rise edge)                5.00       5.00
+  clock network delay (ideal)              0.00       5.00
+  clock uncertainty                       -0.07       4.93
+  DOUT_reg[12]/CK (DFFR_X1)                0.00       4.93 r
+  library setup time                      -0.04       4.89
+  data required time                                  4.89
+  -----------------------------------------------------------
+  data required time                                  4.89
+  data arrival time                                  -4.52
+  -----------------------------------------------------------
+  slack (MET)                                         0.36
+
+
+1
