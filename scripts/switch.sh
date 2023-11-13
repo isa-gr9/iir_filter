@@ -1,5 +1,6 @@
 #!/bin/sh
 
+cd ../sim/
 source /eda/scripts/init_questa_core_prime
 
 set -e
@@ -31,3 +32,6 @@ source /eda/scripts/init_design_vision
 
 #Convert the file with the switching activity from vcd to saif thanks to the script of DC tool suit
 vcd2saif -input ../vcd/iir_syn.vcd -output ../saif/iir_syn.saif
+
+
+dc_shell-xg-t -64 -f ../scripts/switch.tcl

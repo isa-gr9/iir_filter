@@ -33,7 +33,8 @@ suppress_message RTDC-126
 ######################################################################
 
 # Set the design to synthesize
-set active_design "iir"
+#set active_design "iir"
+set active_design "iir_advanced"
 
 
 # DEFINE WORK DIRS
@@ -54,7 +55,6 @@ set power_preserve_rtl_hier_names true
 
 
 # Elaborate design
-#elaborate $active_design -arch behavioral -lib WORK > ${dirname}/${active_design}_elaborate.txt
 elaborate -lib $active_design $active_design > ${dirname}/${active_design}_elaborate.txt
 
 ######################################################################

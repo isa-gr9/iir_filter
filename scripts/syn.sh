@@ -23,7 +23,7 @@ if [ "$#" -eq 0 ]; then
 elif [ "$#" -eq 1 ] && [ "$1" = "cg" ]; then
     # If the parameter is "cg", use the alternate script
     dc_shell-xg-t -64 -f ../scripts/syn_cg.tcl > ${FINALS}
-    pt_shell -f ../scripts/pt_analysis.tcl > ${FINALP}
+    dc_shell-xg-t -64 -f ../scripts/pt_analysis.tcl > ${FINALP}
 else
     # If an invalid parameter is provided, display an error message
     echo "Invalid parameter. Usage: $0 [cg]"
