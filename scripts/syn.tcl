@@ -33,8 +33,8 @@ suppress_message RTDC-126
 ######################################################################
 
 # Set the design to synthesize
-#set active_design "iir"
-set active_design "iir_advanced"
+set active_design "iir"
+#set active_design "iir_advanced"
 
 
 # DEFINE WORK DIRS

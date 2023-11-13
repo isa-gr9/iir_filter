@@ -1,0 +1,79 @@
+ 
+****************************************
+Report : clock_gating
+        -enable_conditions
+Design : iir
+Version: S-2021.06-SP4
+Date   : Mon Nov 13 16:59:07 2023
+****************************************
+
+Information: Identification of clock-gating cells has not been performed. Pre-existing clock-gating cells will not be reported. (PWR-947)
+--------------------------------------------------------------------------------
+                             Enable Conditions Report
+--------------------------------------------------------------------------------
+            Clock Gating Bank                    |         Gated Register 
+--------------------------------------------------------------------------------
+                                                 |
+ clk_gate_b0_i_reg                               |       b0_i_reg[12]
+                                                 |       b1_i_reg[0]
+                                                 |       b0_i_reg[11]
+                                                 |       b0_i_reg[10]
+                                                 |       b0_i_reg[9]
+                                                 |       b0_i_reg[8]
+                                                 |       b0_i_reg[7]
+                                                 |       b0_i_reg[6]
+                                                 |       b0_i_reg[5]
+                                                 |       b0_i_reg[4]
+                                                 |       b0_i_reg[3]
+                                                 |       b0_i_reg[2]
+                                                 |       b0_i_reg[1]
+                                                 |       b0_i_reg[0]
+                                                 |       a1_i_reg[12]
+                                                 |       a1_i_reg[11]
+                                                 |       a1_i_reg[10]
+                                                 |       a1_i_reg[9]
+                                                 |       a1_i_reg[8]
+                                                 |       a1_i_reg[7]
+                                                 |       a1_i_reg[6]
+                                                 |       a1_i_reg[5]
+                                                 |       a1_i_reg[4]
+                                                 |       a1_i_reg[3]
+                                                 |       a1_i_reg[2]
+                                                 |       a1_i_reg[1]
+                                                 |       a1_i_reg[0]
+                                                 |       b1_i_reg[12]
+                                                 |       b1_i_reg[3]
+                                                 |       b1_i_reg[4]
+                                                 |       b1_i_reg[5]
+                                                 |       b1_i_reg[6]
+                                                 |       b1_i_reg[7]
+                                                 |       b1_i_reg[8]
+                                                 |       b1_i_reg[9]
+                                                 |       b1_i_reg[10]
+                                                 |       b1_i_reg[11]
+                                                 |       b1_i_reg[1]
+                                                 |       b1_i_reg[2]
+
+Enable condition: 
+RST_n & VIN
+--------------------------------------------------------------------------------
+                                                 |
+ clk_gate_sw_reg                                 |       sw_reg[5]
+                                                 |       sw_reg[3]
+                                                 |       sw_reg[7]
+                                                 |       sw_reg[9]
+                                                 |       sw_reg[11]
+                                                 |       sw_reg[1]
+                                                 |       sw_reg[6]
+                                                 |       sw_reg[4]
+                                                 |       sw_reg[2]
+                                                 |       sw_reg[8]
+                                                 |       sw_reg[10]
+                                                 |       sw_reg[13]
+                                                 |       sw_reg[12]
+                                                 |       sw_reg[0]
+
+Enable condition: 
+vin_i_reg/Q
+--------------------------------------------------------------------------------
+1

@@ -1,0 +1,32 @@
+ 
+****************************************
+Report : area
+Design : iir_advanced
+Version: S-2021.06-SP4
+Date   : Mon Nov 13 16:53:46 2023
+****************************************
+
+Library(s) Used:
+
+    gtech (File: /eda/synopsys/2021-22/RHELx86/SYN_2021.06-SP4/libraries/syn/gtech.db)
+
+Number of ports:                          868
+Number of nets:                          4370
+Number of cells:                         2602
+Number of combinational cells:           2367
+Number of sequential cells:               209
+Number of macros/black boxes:               0
+Number of buf/inv:                        170
+Number of references:                      10
+
+Combinational area:                  0.000000
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                     0.000000
+Total area:                 undefined
+
+Information: This design contains unmapped logic. (RPT-7)
+1

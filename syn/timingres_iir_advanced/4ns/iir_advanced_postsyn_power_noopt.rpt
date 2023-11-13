@@ -2,9 +2,9 @@
 ****************************************
 Report : power
         -analysis_effort low
-Design : iir
+Design : iir_advanced
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:07:21 2023
+Date   : Mon Nov 13 16:30:05 2023
 ****************************************
 
 
@@ -18,7 +18,7 @@ Wire Load Model Mode: top
 
 Design        Wire Load Model            Library
 ------------------------------------------------
-iir                    5K_hvratio_1_1    NangateOpenCellLibrary
+iir_advanced           5K_hvratio_1_1    NangateOpenCellLibrary
 
 
 Global Operating Voltage = 1.1  
@@ -30,12 +30,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 158.8288 uW   (65%)
-  Net Switching Power  =  85.2642 uW   (35%)
+  Cell Internal Power  = 298.6141 uW   (76%)
+  Net Switching Power  =  93.7032 uW   (24%)
                          ---------
-Total Dynamic Power    = 244.0930 uW  (100%)
+Total Dynamic Power    = 392.3173 uW  (100%)
 
-Cell Leakage Power     =  53.2788 uW
+Cell Leakage Power     =  74.5733 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -45,9 +45,9 @@ io_pad             0.0000            0.0000            0.0000            0.0000 
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
 clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register          84.9450           20.4135        6.0969e+03          111.4554  (  37.48%)
+register         225.7483           25.4355        1.1716e+04          262.8997  (  56.31%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational     73.8838           64.8506        4.7182e+04          185.9165  (  62.52%)
+combinational     72.8657           68.2676        6.2858e+04          203.9910  (  43.69%)
 --------------------------------------------------------------------------------------------------
-Total            158.8288 uW        85.2642 uW     5.3279e+04 nW       297.3719 uW
+Total            298.6140 uW        93.7032 uW     7.4573e+04 nW       466.8907 uW
 1

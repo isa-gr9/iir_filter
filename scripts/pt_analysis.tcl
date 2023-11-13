@@ -26,7 +26,8 @@ suppress_message CMD-041
 ##
 ######################################################################
 # DEFINE CIRCUITS
-set active_design "iir"
+#set active_design "iir"
+set active_design "iir_advanced"
 
 # DEFINE INPUT FILES
 set dirname "./results/${active_design}/pt"

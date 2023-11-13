@@ -1,16 +1,19 @@
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
  
 ****************************************
 Report : power
         -analysis_effort low
-Design : iir
+Design : iir_advanced
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:07:21 2023
+Date   : Mon Nov 13 16:53:46 2023
 ****************************************
 
 
 Library(s) Used:
 
-    NangateOpenCellLibrary (File: /eda/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db)
+    gtech (File: /eda/synopsys/2021-22/RHELx86/SYN_2021.06-SP4/libraries/syn/gtech.db)
 
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
@@ -18,7 +21,7 @@ Wire Load Model Mode: top
 
 Design        Wire Load Model            Library
 ------------------------------------------------
-iir                    5K_hvratio_1_1    NangateOpenCellLibrary
+iir_advanced           5K_hvratio_1_1    NangateOpenCellLibrary
 
 
 Global Operating Voltage = 1.1  
@@ -30,12 +33,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 158.8288 uW   (65%)
-  Net Switching Power  =  85.2642 uW   (35%)
+  Cell Internal Power  =   0.0000 uW    (0%)
+  Net Switching Power  =  19.8648 uW  (100%)
                          ---------
-Total Dynamic Power    = 244.0930 uW  (100%)
+Total Dynamic Power    =  19.8648 uW  (100%)
 
-Cell Leakage Power     =  53.2788 uW
+Cell Leakage Power     =   0.0000 nW
 
 
                  Internal         Switching           Leakage            Total
@@ -45,9 +48,9 @@ io_pad             0.0000            0.0000            0.0000            0.0000 
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
 clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register          84.9450           20.4135        6.0969e+03          111.4554  (  37.48%)
+register           0.0000            2.4601            0.0000            2.4601  (  12.38%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational     73.8838           64.8506        4.7182e+04          185.9165  (  62.52%)
+combinational      0.0000           17.4047            0.0000           17.4047  (  87.62%)
 --------------------------------------------------------------------------------------------------
-Total            158.8288 uW        85.2642 uW     5.3279e+04 nW       297.3719 uW
+Total              0.0000 uW        19.8648 uW         0.0000 nW        19.8648 uW
 1

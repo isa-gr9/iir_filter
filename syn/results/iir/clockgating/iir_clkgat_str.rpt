@@ -1,0 +1,124 @@
+ 
+****************************************
+Report : clock_gating
+        -structure
+Design : iir
+Version: S-2021.06-SP4
+Date   : Mon Nov 13 16:59:06 2023
+****************************************
+
+Information: Identification of clock-gating cells has not been performed. Pre-existing clock-gating cells will not be reported. (PWR-947)
+--------------------------------------------------------------------------------
+                        Clock Gating Structure Summary
+--------------------------------------------------------------------------------
+   Clock              | Total       | CG Stage   | # of Clock | # of Gated
+                      | Registers   |            | Gates      | Cells
+--------------------------------------------------------------------------------
+   CLK_SYS            | 73          | 1          | 2          | 53
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+                        Clock Gating Structure Details
+--------------------------------------------------------------------------------
+   Clock    | CG    | Gating                | Fanout | Latency | Gated Cells
+            | Stage | Element               |        |         |
+--------------------------------------------------------------------------------
+   CLK_SYS  | 1     | clk_gate_b0_i_reg     | 39     | -       | b0_i_reg[12]
+            |       |                       |        |         | b1_i_reg[0]
+            |       |                       |        |         | b0_i_reg[11]
+            |       |                       |        |         | b0_i_reg[10]
+            |       |                       |        |         | b0_i_reg[9]
+            |       |                       |        |         | b0_i_reg[8]
+            |       |                       |        |         | b0_i_reg[7]
+            |       |                       |        |         | b0_i_reg[6]
+            |       |                       |        |         | b0_i_reg[5]
+            |       |                       |        |         | b0_i_reg[4]
+            |       |                       |        |         | b0_i_reg[3]
+            |       |                       |        |         | b0_i_reg[2]
+            |       |                       |        |         | b0_i_reg[1]
+            |       |                       |        |         | b0_i_reg[0]
+            |       |                       |        |         | a1_i_reg[12]
+            |       |                       |        |         | a1_i_reg[11]
+            |       |                       |        |         | a1_i_reg[10]
+            |       |                       |        |         | a1_i_reg[9]
+            |       |                       |        |         | a1_i_reg[8]
+            |       |                       |        |         | a1_i_reg[7]
+            |       |                       |        |         | a1_i_reg[6]
+            |       |                       |        |         | a1_i_reg[5]
+            |       |                       |        |         | a1_i_reg[4]
+            |       |                       |        |         | a1_i_reg[3]
+            |       |                       |        |         | a1_i_reg[2]
+            |       |                       |        |         | a1_i_reg[1]
+            |       |                       |        |         | a1_i_reg[0]
+            |       |                       |        |         | b1_i_reg[12]
+            |       |                       |        |         | b1_i_reg[3]
+            |       |                       |        |         | b1_i_reg[4]
+            |       |                       |        |         | b1_i_reg[5]
+            |       |                       |        |         | b1_i_reg[6]
+            |       |                       |        |         | b1_i_reg[7]
+            |       |                       |        |         | b1_i_reg[8]
+            |       |                       |        |         | b1_i_reg[9]
+            |       |                       |        |         | b1_i_reg[10]
+            |       |                       |        |         | b1_i_reg[11]
+            |       |                       |        |         | b1_i_reg[1]
+            |       |                       |        |         | b1_i_reg[2]
+            |       |                       |        |         |
+            |       | clk_gate_sw_reg       | 14     | -       | sw_reg[5]
+            |       |                       |        |         | sw_reg[3]
+            |       |                       |        |         | sw_reg[7]
+            |       |                       |        |         | sw_reg[9]
+            |       |                       |        |         | sw_reg[11]
+            |       |                       |        |         | sw_reg[1]
+            |       |                       |        |         | sw_reg[6]
+            |       |                       |        |         | sw_reg[4]
+            |       |                       |        |         | sw_reg[2]
+            |       |                       |        |         | sw_reg[8]
+            |       |                       |        |         | sw_reg[10]
+            |       |                       |        |         | sw_reg[13]
+            |       |                       |        |         | sw_reg[12]
+            |       |                       |        |         | sw_reg[0]
+            |       |                       |        |         |
+--------------------------------------------------------------------------------
+
+
+
+
+                             Clock Gating Summary
+          ------------------------------------------------------------
+          |    Number of Clock gating elements    |        2         |
+          |                                       |                  |
+          |    Number of Gated registers          |    53 (72.60%)   |
+          |                                       |                  |
+          |    Number of Ungated registers        |    20 (27.40%)   |
+          |                                       |                  |
+          |    Maximum number of stages           |        1         |
+          |                                       |                  |
+          |    Total number of registers          |       73         |
+          ------------------------------------------------------------
+
+
+
+                             Clock Gating Report by Origin
+          +-------------------------------------------------+------------------+
+          |                                                 |    Actual (%)    |
+          |                                                 |    Count         |
+          +-------------------------------------------------+------------------+
+          |  Number of tool-inserted clock gating elements  |     2 (100.00%)  |
+          |                                                 |                  |
+          |  Number of pre-existing clock gating elements   |     0 (0.00%)    |
+          |                                                 |                  |
+          |  Number of gated registers                      |    53 (72.60%)   |
+          |                                                 |                  |
+          |  Number of tool-inserted gated registers        |    53 (72.60%)   |
+          |                                                 |                  |
+          |  Number of pre-existing gated registers         |     0 (0.00%)    |
+          |                                                 |                  |
+          |  Number of ungated registers                    |    20 (27.40%)   |
+          |                                                 |                  |
+          |  Number of registers                            |       73         |
+          +-------------------------------------------------+------------------+
+
+
+
+1

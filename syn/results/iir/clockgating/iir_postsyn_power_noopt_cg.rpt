@@ -4,7 +4,7 @@ Report : power
         -analysis_effort low
 Design : iir
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:07:21 2023
+Date   : Mon Nov 13 16:59:04 2023
 ****************************************
 
 
@@ -30,12 +30,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 158.8288 uW   (65%)
-  Net Switching Power  =  85.2642 uW   (35%)
+  Cell Internal Power  = 124.7283 uW   (59%)
+  Net Switching Power  =  87.6245 uW   (41%)
                          ---------
-Total Dynamic Power    = 244.0930 uW  (100%)
+Total Dynamic Power    = 212.3528 uW  (100%)
 
-Cell Leakage Power     =  53.2788 uW
+Cell Leakage Power     =  51.0866 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -44,10 +44,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register          84.9450           20.4135        6.0969e+03          111.4554  (  37.48%)
+clock_network      2.1678            5.6465          130.5120            7.9448  (   3.02%)
+register          50.8223           18.9691        6.0869e+03           75.8784  (  28.80%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational     73.8838           64.8506        4.7182e+04          185.9165  (  62.52%)
+combinational     71.7381           63.0089        4.4869e+04          179.6162  (  68.18%)
 --------------------------------------------------------------------------------------------------
-Total            158.8288 uW        85.2642 uW     5.3279e+04 nW       297.3719 uW
+Total            124.7282 uW        87.6245 uW     5.1087e+04 nW       263.4394 uW
 1

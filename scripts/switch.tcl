@@ -1,4 +1,6 @@
 set active_design "iir"
+#set active_design "iir_advanced"
+
 set dirname "./results/${active_design}"
 set timing_rpt "${dirname}/${active_design}_switching_postsyn_timing.rpt"
 set power_rpt "${dirname}/${active_design}_switching_postsyn_power.rpt"
