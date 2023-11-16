@@ -2,6 +2,7 @@
 
 cd ../sim/
 source /eda/scripts/init_questa_core_prime
+source /eda/scripts/init_design_vision
 
 set -e
 
@@ -10,28 +11,30 @@ vcom -work ./work ../tb/clk_gen.vhd
 vcom -work ./work ../tb/data_maker_new.vhd
 vcom -work ./work ../tb/data_sink.vhd
 
-vlog -work ./work ../syn/results/iir/iir_postsyn_netlist.v
+vlog -work ./work ../syn/results/iir_advanced/iir_advanced_postsyn_netlist.v
+#vlog -work ./work ../syn/results/iir/iir_postsyn_netlist.v
 vlog -work ./work ../tb/tb_iir.v
 
-#Link the compiled library of the cells
-vsim -L /eda/dk/nangate45/verilog/qsim2020.4 work.tb_iir
+vsim -do ../scripts/switch.do
 
-#Link the delay file
-vsim -L /eda/dk/nangate45/verilog/qsim2020.4 -sdftyp /tb_iir/UUT=../syn/results/iir/iir.sdf work.tb_iir
+# Remove work directory
+rm -rf work
 
+# Remove vsim and transcript files
+rm -f vsim.wlf transcript
 
-#vcd file
-vcd file ../vcd/iir_syn.vcd
+cd ../syn
 
-#Monitor all the signals
-vcd add /tb_iir/UUT/*
-
-run 2 us
-
-source /eda/scripts/init_design_vision
-
-#Convert the file with the switching activity from vcd to saif thanks to the script of DC tool suit
-vcd2saif -input ../vcd/iir_syn.vcd -output ../saif/iir_syn.saif
-
-
-dc_shell-xg-t -64 -f ../scripts/switch.tcl
+# Check if a command line parameter is provided
+if [ "$#" -eq 0 ]; then
+    # If no parameter is provided, use the default script
+    dc_shell-xg-t -64 -f ../scripts/switch.tcl 
+elif [ "$#" -eq 1 ] && [ "$1" = "cg" ]; then
+    # If the parameter is "cg", use the alternate script
+    mv ../saif/iir_advanced_syn.saif ../saif/iir_advanced_syn_cg.saif
+    dc_shell-xg-t -64 -f ../scripts/switch_cg.tcl
+else
+    # If an invalid parameter is provided, display an error message
+    echo "Invalid parameter. Usage: $0 [cg]"
+    exit 1
+fi
