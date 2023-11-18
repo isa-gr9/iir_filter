@@ -4,23 +4,168 @@ Report : clock_gating
         -structure
 Design : iir_advanced
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:53:47 2023
+Date   : Thu Nov 16 17:49:22 2023
 ****************************************
 
 Information: Identification of clock-gating cells has not been performed. Pre-existing clock-gating cells will not be reported. (PWR-947)
+--------------------------------------------------------------------------------
+                        Clock Gating Structure Summary
+--------------------------------------------------------------------------------
+   Clock              | Total       | CG Stage   | # of Clock | # of Gated
+                      | Registers   |            | Gates      | Cells
+--------------------------------------------------------------------------------
+   CLK_SYS            | 144         | 1          | 2          | 124
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+                        Clock Gating Structure Details
+--------------------------------------------------------------------------------
+   Clock    | CG    | Gating                | Fanout | Latency | Gated Cells
+            | Stage | Element               |        |         |
+--------------------------------------------------------------------------------
+   CLK_SYS  | 1     | clk_gate_b0_i_reg     | 39     | -       | a1_i_reg[9]
+            |       |                       |        |         | a1_i_reg[7]
+            |       |                       |        |         | a1_i_reg[1]
+            |       |                       |        |         | a1_i_reg[6]
+            |       |                       |        |         | a1_i_reg[5]
+            |       |                       |        |         | a1_i_reg[0]
+            |       |                       |        |         | a1_i_reg[3]
+            |       |                       |        |         | a1_i_reg[10]
+            |       |                       |        |         | b1_i_reg[12]
+            |       |                       |        |         | b0_i_reg[2]
+            |       |                       |        |         | a1_i_reg[11]
+            |       |                       |        |         | a1_i_reg[2]
+            |       |                       |        |         | a1_i_reg[4]
+            |       |                       |        |         | a1_i_reg[8]
+            |       |                       |        |         | a1_i_reg[12]
+            |       |                       |        |         | b1_i_reg[0]
+            |       |                       |        |         | b1_i_reg[1]
+            |       |                       |        |         | b1_i_reg[2]
+            |       |                       |        |         | b1_i_reg[3]
+            |       |                       |        |         | b1_i_reg[4]
+            |       |                       |        |         | b1_i_reg[5]
+            |       |                       |        |         | b1_i_reg[6]
+            |       |                       |        |         | b1_i_reg[7]
+            |       |                       |        |         | b1_i_reg[8]
+            |       |                       |        |         | b1_i_reg[9]
+            |       |                       |        |         | b1_i_reg[10]
+            |       |                       |        |         | b1_i_reg[11]
+            |       |                       |        |         | b0_i_reg[0]
+            |       |                       |        |         | b0_i_reg[1]
+            |       |                       |        |         | b0_i_reg[3]
+            |       |                       |        |         | b0_i_reg[4]
+            |       |                       |        |         | b0_i_reg[5]
+            |       |                       |        |         | b0_i_reg[6]
+            |       |                       |        |         | b0_i_reg[7]
+            |       |                       |        |         | b0_i_reg[8]
+            |       |                       |        |         | b0_i_reg[9]
+            |       |                       |        |         | b0_i_reg[10]
+            |       |                       |        |         | b0_i_reg[11]
+            |       |                       |        |         | b0_i_reg[12]
+            |       |                       |        |         |
+            |       | clk_gate_w_1_reg      | 85     | -       | c_1_reg[11]
+            |       |                       |        |         | x_1_reg[0]
+            |       |                       |        |         | c_1_reg[10]
+            |       |                       |        |         | c_1_reg[9]
+            |       |                       |        |         | x_1_reg[12]
+            |       |                       |        |         | w_1_reg[3]
+            |       |                       |        |         | w_1_reg[5]
+            |       |                       |        |         | w_1_reg[7]
+            |       |                       |        |         | w_1_reg[9]
+            |       |                       |        |         | w_1_reg[11]
+            |       |                       |        |         | g_1_reg[8]
+            |       |                       |        |         | g_1_reg[9]
+            |       |                       |        |         | g_1_reg[10]
+            |       |                       |        |         | g_1_reg[11]
+            |       |                       |        |         | g_1_reg[12]
+            |       |                       |        |         | f_2_reg[8]
+            |       |                       |        |         | f_2_reg[9]
+            |       |                       |        |         | f_2_reg[10]
+            |       |                       |        |         | f_2_reg[11]
+            |       |                       |        |         | f_2_reg[12]
+            |       |                       |        |         | f_1_reg[8]
+            |       |                       |        |         | f_1_reg[9]
+            |       |                       |        |         | f_1_reg[10]
+            |       |                       |        |         | f_1_reg[11]
+            |       |                       |        |         | f_1_reg[12]
+            |       |                       |        |         | e_2_reg[8]
+            |       |                       |        |         | e_2_reg[9]
+            |       |                       |        |         | e_2_reg[10]
+            |       |                       |        |         | e_2_reg[11]
+            |       |                       |        |         | e_2_reg[12]
+            |       |                       |        |         | e_1_reg[8]
+            |       |                       |        |         | e_1_reg[9]
+            |       |                       |        |         | e_1_reg[10]
+            |       |                       |        |         | e_1_reg[11]
+            |       |                       |        |         | e_1_reg[12]
+            |       |                       |        |         | d_1_reg[0]
+            |       |                       |        |         | d_1_reg[1]
+            |       |                       |        |         | d_1_reg[2]
+            |       |                       |        |         | d_1_reg[3]
+            |       |                       |        |         | d_1_reg[4]
+            |       |                       |        |         | d_1_reg[5]
+            |       |                       |        |         | d_1_reg[6]
+            |       |                       |        |         | d_1_reg[7]
+            |       |                       |        |         | d_1_reg[8]
+            |       |                       |        |         | d_1_reg[9]
+            |       |                       |        |         | d_1_reg[10]
+            |       |                       |        |         | d_1_reg[11]
+            |       |                       |        |         | d_1_reg[12]
+            |       |                       |        |         | d_1_reg[13]
+            |       |                       |        |         | c_1_reg[8]
+            |       |                       |        |         | c_1_reg[13]
+            |       |                       |        |         | x_1_reg[1]
+            |       |                       |        |         | x_1_reg[2]
+            |       |                       |        |         | x_1_reg[3]
+            |       |                       |        |         | x_1_reg[4]
+            |       |                       |        |         | x_1_reg[5]
+            |       |                       |        |         | x_1_reg[6]
+            |       |                       |        |         | x_1_reg[7]
+            |       |                       |        |         | x_1_reg[8]
+            |       |                       |        |         | x_1_reg[9]
+            |       |                       |        |         | x_1_reg[10]
+            |       |                       |        |         | x_1_reg[11]
+            |       |                       |        |         | w_2_reg[0]
+            |       |                       |        |         | w_2_reg[1]
+            |       |                       |        |         | w_2_reg[2]
+            |       |                       |        |         | w_2_reg[3]
+            |       |                       |        |         | w_2_reg[4]
+            |       |                       |        |         | w_2_reg[5]
+            |       |                       |        |         | w_2_reg[6]
+            |       |                       |        |         | w_2_reg[7]
+            |       |                       |        |         | w_2_reg[8]
+            |       |                       |        |         | w_2_reg[9]
+            |       |                       |        |         | w_2_reg[10]
+            |       |                       |        |         | w_2_reg[11]
+            |       |                       |        |         | w_2_reg[12]
+            |       |                       |        |         | w_2_reg[13]
+            |       |                       |        |         | w_1_reg[0]
+            |       |                       |        |         | w_1_reg[1]
+            |       |                       |        |         | w_1_reg[2]
+            |       |                       |        |         | w_1_reg[4]
+            |       |                       |        |         | w_1_reg[6]
+            |       |                       |        |         | w_1_reg[8]
+            |       |                       |        |         | w_1_reg[10]
+            |       |                       |        |         | w_1_reg[12]
+            |       |                       |        |         | w_1_reg[13]
+            |       |                       |        |         |
+--------------------------------------------------------------------------------
+
+
 
 
                              Clock Gating Summary
           ------------------------------------------------------------
-          |    Number of Clock gating elements    |        0         |
+          |    Number of Clock gating elements    |        2         |
           |                                       |                  |
-          |    Number of Gated registers          |     0 (0.00%)    |
+          |    Number of Gated registers          |   124 (86.11%)   |
           |                                       |                  |
-          |    Number of Ungated registers        |   208 (100.00%)  |
+          |    Number of Ungated registers        |    20 (13.89%)   |
           |                                       |                  |
-          |    Maximum number of stages           |        -         |
+          |    Maximum number of stages           |        1         |
           |                                       |                  |
-          |    Total number of registers          |      208         |
+          |    Total number of registers          |      144         |
           ------------------------------------------------------------
 
 
@@ -30,19 +175,19 @@ Information: Identification of clock-gating cells has not been performed. Pre-ex
           |                                                 |    Actual (%)    |
           |                                                 |    Count         |
           +-------------------------------------------------+------------------+
-          |  Number of tool-inserted clock gating elements  |     0 (0.00%)    |
+          |  Number of tool-inserted clock gating elements  |     2 (100.00%)  |
           |                                                 |                  |
           |  Number of pre-existing clock gating elements   |     0 (0.00%)    |
           |                                                 |                  |
-          |  Number of gated registers                      |     0 (0.00%)    |
+          |  Number of gated registers                      |   124 (86.11%)   |
           |                                                 |                  |
-          |  Number of tool-inserted gated registers        |     0 (0.00%)    |
+          |  Number of tool-inserted gated registers        |   124 (86.11%)   |
           |                                                 |                  |
           |  Number of pre-existing gated registers         |     0 (0.00%)    |
           |                                                 |                  |
-          |  Number of ungated registers                    |   208 (100.00%)  |
+          |  Number of ungated registers                    |    20 (13.89%)   |
           |                                                 |                  |
-          |  Number of registers                            |      208         |
+          |  Number of registers                            |      144         |
           +-------------------------------------------------+------------------+
 
 

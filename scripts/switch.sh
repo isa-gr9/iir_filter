@@ -11,8 +11,9 @@ vcom -work ./work ../tb/clk_gen.vhd
 vcom -work ./work ../tb/data_maker_new.vhd
 vcom -work ./work ../tb/data_sink.vhd
 
-vlog -work ./work ../syn/results/iir_advanced/iir_advanced_postsyn_netlist.v
-#vlog -work ./work ../syn/results/iir/iir_postsyn_netlist.v
+#vlog -work ./work ../syn/results/iir_advanced/iir_advanced_postsyn_netlist.v
+vlog -work ./work ../syn/results/iir/iir_postsyn_netlist.v
+
 vlog -work ./work ../tb/tb_iir.v
 
 vsim -do ../scripts/switch.do

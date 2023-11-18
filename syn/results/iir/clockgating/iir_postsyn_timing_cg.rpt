@@ -7,13 +7,13 @@ Report : timing
         -max_paths 1
 Design : iir
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:59:04 2023
+Date   : Thu Nov 16 18:17:21 2023
 ****************************************
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
 Wire Load Model Mode: top
 
-  Startpoint: sw_reg[3] (rising edge-triggered flip-flop clocked by CLK_SYS)
+  Startpoint: sw_reg[1] (rising edge-triggered flip-flop clocked by CLK_SYS)
   Endpoint: DOUT_reg[12]
             (rising edge-triggered flip-flop clocked by CLK_SYS)
   Path Group: CLK_SYS
@@ -27,75 +27,64 @@ Wire Load Model Mode: top
   -----------------------------------------------------------
   clock CLK_SYS (rise edge)                0.00       0.00
   clock network delay (ideal)              0.00       0.00
-  sw_reg[3]/CK (DFFS_X2)                   0.00       0.00 r
-  sw_reg[3]/QN (DFFS_X2)                   0.16       0.16 f
-  U230/ZN (OAI22_X1)                       0.09       0.25 r
-  U97/ZN (INV_X1)                          0.04       0.28 f
-  U98/ZN (INV_X1)                          0.10       0.39 r
-  U231/ZN (OAI221_X1)                      0.07       0.46 f
-  U91/ZN (INV_X1)                          0.04       0.50 r
-  U92/ZN (INV_X1)                          0.05       0.55 f
-  U452/ZN (AOI221_X1)                      0.10       0.65 r
-  U453/ZN (INV_X1)                         0.02       0.67 f
-  U454/ZN (OAI21_X1)                       0.04       0.71 r
-  U455/S (HA_X1)                           0.08       0.79 r
-  U480/S (FA_X1)                           0.12       0.91 f
-  U482/ZN (NOR2_X1)                        0.04       0.95 r
-  U484/ZN (OAI21_X1)                       0.03       0.98 f
-  U485/ZN (AOI222_X1)                      0.11       1.09 r
-  U490/ZN (OAI21_X1)                       0.04       1.13 f
-  U491/ZN (AOI222_X1)                      0.10       1.24 r
-  U499/ZN (OAI21_X1)                       0.04       1.28 f
-  U500/ZN (AOI222_X1)                      0.10       1.38 r
-  U505/ZN (OAI21_X1)                       0.04       1.42 f
-  U506/ZN (AOI222_X1)                      0.11       1.53 r
-  U511/ZN (OAI21_X1)                       0.04       1.57 f
-  U512/ZN (AOI222_X1)                      0.11       1.68 r
-  U517/ZN (OAI21_X1)                       0.04       1.72 f
-  U518/ZN (AOI222_X1)                      0.11       1.83 r
-  U523/ZN (OAI21_X1)                       0.04       1.87 f
-  U524/ZN (AOI222_X1)                      0.11       1.99 r
-  U529/ZN (OAI21_X1)                       0.04       2.02 f
-  U553/CO (FA_X1)                          0.09       2.11 f
-  U810/S (FA_X1)                           0.13       2.25 r
-  U811/ZN (INV_X1)                         0.02       2.27 f
-  intadd_1/U5/CO (FA_X1)                   0.10       2.37 f
-  intadd_1/U4/S (FA_X1)                    0.18       2.55 r
-  U165/ZN (XNOR2_X1)                       0.08       2.63 r
-  U728/ZN (OAI22_X1)                       0.04       2.67 f
-  U768/CO (FA_X1)                          0.11       2.78 f
-  U770/CO (FA_X1)                          0.10       2.88 f
-  U771/CO (FA_X1)                          0.09       2.97 f
-  U772/CO (FA_X1)                          0.09       3.06 f
-  U773/CO (FA_X1)                          0.09       3.16 f
-  U774/CO (FA_X1)                          0.09       3.25 f
-  U775/CO (FA_X1)                          0.09       3.34 f
-  U776/CO (FA_X1)                          0.09       3.43 f
-  U777/CO (FA_X1)                          0.09       3.52 f
-  U778/CO (FA_X1)                          0.09       3.61 f
-  U1104/CO (FA_X1)                         0.09       3.70 f
-  U786/CO (FA_X1)                          0.09       3.79 f
-  U814/CO (FA_X1)                          0.09       3.88 f
-  U1111/S (FA_X1)                          0.13       4.01 r
-  U787/ZN (INV_X1)                         0.02       4.04 f
-  intadd_7/U2/CO (FA_X1)                   0.10       4.13 f
-  U1120/ZN (XNOR2_X1)                      0.06       4.19 f
-  U1121/ZN (XNOR2_X1)                      0.06       4.25 f
-  U1122/ZN (XNOR2_X1)                      0.06       4.31 f
-  DOUT_reg[12]/D (DFFR_X1)                 0.01       4.32 f
-  data arrival time                                   4.32
+  sw_reg[1]/CK (DFFR_X1)                   0.00       0.00 r
+  sw_reg[1]/Q (DFFR_X1)                    0.11       0.11 r
+  U61/Z (CLKBUF_X1)                        0.05       0.16 r
+  U890/ZN (XNOR2_X1)                       0.06       0.22 r
+  U671/ZN (OR2_X1)                         0.04       0.26 r
+  U262/ZN (NAND2_X1)                       0.03       0.29 f
+  U918/CO (FA_X1)                          0.10       0.39 f
+  U908/CO (FA_X1)                          0.09       0.48 f
+  U904/S (FA_X1)                           0.13       0.61 r
+  U907/S (FA_X1)                           0.12       0.73 f
+  U126/ZN (NOR2_X1)                        0.05       0.78 r
+  U1028/ZN (OAI21_X1)                      0.03       0.81 f
+  U1032/ZN (AOI21_X1)                      0.04       0.85 r
+  U1033/ZN (OAI21_X1)                      0.04       0.89 f
+  U1067/ZN (AOI21_X1)                      0.04       0.93 r
+  U1097/ZN (OAI21_X1)                      0.03       0.97 f
+  U1111/ZN (XNOR2_X1)                      0.06       1.02 r
+  U622/ZN (AND2_X2)                        0.07       1.09 r
+  U684/ZN (INV_X1)                         0.03       1.12 f
+  U472/ZN (OR2_X1)                         0.05       1.17 f
+  U686/ZN (NAND3_X1)                       0.04       1.20 r
+  U632/ZN (OAI22_X1)                       0.04       1.24 f
+  U368/ZN (NAND2_X1)                       0.04       1.28 r
+  U370/ZN (NAND3_X1)                       0.05       1.33 f
+  U424/ZN (NAND2_X1)                       0.04       1.37 r
+  U426/ZN (NAND3_X1)                       0.04       1.41 f
+  U640/S (FA_X1)                           0.15       1.56 r
+  U456/ZN (XNOR2_X1)                       0.06       1.62 r
+  U455/ZN (XNOR2_X1)                       0.06       1.69 r
+  U1248/ZN (NOR2_X1)                       0.03       1.71 f
+  U653/ZN (OAI21_X1)                       0.04       1.75 r
+  U762/ZN (AOI21_X1)                       0.03       1.78 f
+  U646/ZN (OAI21_X1)                       0.05       1.83 r
+  U618/ZN (AOI21_X2)                       0.04       1.87 f
+  U620/ZN (OAI21_X1)                       0.05       1.92 r
+  U619/ZN (XNOR2_X1)                       0.07       1.99 r
+  U356/ZN (AND2_X1)                        0.06       2.04 r
+  U440/ZN (NAND2_X1)                       0.03       2.08 f
+  U442/ZN (NAND3_X1)                       0.04       2.12 r
+  U518/ZN (NAND2_X1)                       0.03       2.15 f
+  U350/ZN (NAND3_X1)                       0.03       2.18 r
+  U474/ZN (NAND2_X1)                       0.03       2.21 f
+  U358/ZN (NAND2_X1)                       0.03       2.23 r
+  U357/ZN (XNOR2_X1)                       0.05       2.29 r
+  DOUT_reg[12]/D (DFFR_X2)                 0.01       2.30 r
+  data arrival time                                   2.30
 
-  clock CLK_SYS (rise edge)                4.80       4.80
-  clock network delay (ideal)              0.00       4.80
-  clock uncertainty                       -0.07       4.73
-  DOUT_reg[12]/CK (DFFR_X1)                0.00       4.73 r
-  library setup time                      -0.04       4.69
-  data required time                                  4.69
+  clock CLK_SYS (rise edge)                2.40       2.40
+  clock network delay (ideal)              0.00       2.40
+  clock uncertainty                       -0.07       2.33
+  DOUT_reg[12]/CK (DFFR_X2)                0.00       2.33 r
+  library setup time                      -0.03       2.30
+  data required time                                  2.30
   -----------------------------------------------------------
-  data required time                                  4.69
-  data arrival time                                  -4.32
+  data required time                                  2.30
+  data arrival time                                  -2.30
   -----------------------------------------------------------
-  slack (MET)                                         0.37
+  slack (MET)                                         0.00
 
 
 1

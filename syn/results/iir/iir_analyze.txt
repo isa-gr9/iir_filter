@@ -1,6 +1,7 @@
 Running PRESTO HDLC
 Compiling Entity Declaration IIR
 Compiling Architecture BEHAVIORAL of IIR
+Warning:  ../rtl/iir.vhd:18: The architecture behavioral has already been analyzed. It is being replaced. (VHD-4)
 Presto compilation completed successfully.
 Loading db file '/eda/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db'
 Loading db file '/eda/synopsys/2021-22/RHELx86/SYN_2021.06-SP4/libraries/syn/dw_foundation.sldb'

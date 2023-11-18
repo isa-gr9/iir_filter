@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Mon Nov 13 16:53:48 2023
+# Created by write_sdc on Thu Nov 16 17:49:24 2023
 
 ###################################################################
 set sdc_version 2.1
@@ -90,3 +90,11 @@ set_output_delay -clock CLK_SYS  0.5  [get_ports {DOUT[2]}]
 set_output_delay -clock CLK_SYS  0.5  [get_ports {DOUT[1]}]
 set_output_delay -clock CLK_SYS  0.5  [get_ports {DOUT[0]}]
 set_output_delay -clock CLK_SYS  0.5  [get_ports VOUT]
+set_clock_gating_check -rise -setup 0 [get_cells clk_gate_w_1_reg/main_gate]
+set_clock_gating_check -fall -setup 0 [get_cells clk_gate_w_1_reg/main_gate]
+set_clock_gating_check -rise -hold 0 [get_cells clk_gate_w_1_reg/main_gate]
+set_clock_gating_check -fall -hold 0 [get_cells clk_gate_w_1_reg/main_gate]
+set_clock_gating_check -rise -setup 0 [get_cells clk_gate_b0_i_reg/main_gate]
+set_clock_gating_check -fall -setup 0 [get_cells clk_gate_b0_i_reg/main_gate]
+set_clock_gating_check -rise -hold 0 [get_cells clk_gate_b0_i_reg/main_gate]
+set_clock_gating_check -fall -hold 0 [get_cells clk_gate_b0_i_reg/main_gate]

@@ -1,10 +1,12 @@
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: The derived toggle rate value (1.000000) for the clock net 'CLK' conflicts with the annotated value (0.200000). Using the annotated value. (PWR-12)
  
 ****************************************
 Report : power
         -analysis_effort low
-Design : iir
+Design : iir_advanced
 Version: S-2021.06-SP4
-Date   : Thu Nov 16 18:17:21 2023
+Date   : Thu Nov 16 12:48:24 2023
 ****************************************
 
 
@@ -18,7 +20,7 @@ Wire Load Model Mode: top
 
 Design        Wire Load Model            Library
 ------------------------------------------------
-iir                    5K_hvratio_1_1    NangateOpenCellLibrary
+iir_advanced           5K_hvratio_1_1    NangateOpenCellLibrary
 
 
 Global Operating Voltage = 1.1  
@@ -30,12 +32,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 271.8874 uW   (58%)
-  Net Switching Power  = 195.0071 uW   (42%)
+  Cell Internal Power  = 172.0338 uW   (62%)
+  Net Switching Power  = 105.6130 uW   (38%)
                          ---------
-Total Dynamic Power    = 466.8945 uW  (100%)
+Total Dynamic Power    = 277.6467 uW  (100%)
 
-Cell Leakage Power     =  59.1155 uW
+Cell Leakage Power     =  80.2091 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -44,10 +46,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network      4.3357           11.2966          130.5120           15.7628  (   3.00%)
-register         101.5370           22.6401        6.0680e+03          130.2451  (  24.76%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register          96.0960           33.1374        1.2561e+04          141.7947  (  39.62%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational    166.0148          161.0705        5.2917e+04          380.0020  (  72.24%)
+combinational     75.9377           72.4758        6.7648e+04          216.0612  (  60.38%)
 --------------------------------------------------------------------------------------------------
-Total            271.8875 uW       195.0071 uW     5.9115e+04 nW       526.0099 uW
+Total            172.0337 uW       105.6132 uW     8.0209e+04 nW       357.8560 uW
 1

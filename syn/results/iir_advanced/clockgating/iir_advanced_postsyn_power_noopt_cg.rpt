@@ -1,19 +1,16 @@
-Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
-Warning: Design has unannotated primary inputs. (PWR-414)
-Warning: Design has unannotated sequential cell outputs. (PWR-415)
  
 ****************************************
 Report : power
         -analysis_effort low
 Design : iir_advanced
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:53:46 2023
+Date   : Thu Nov 16 17:49:21 2023
 ****************************************
 
 
 Library(s) Used:
 
-    gtech (File: /eda/synopsys/2021-22/RHELx86/SYN_2021.06-SP4/libraries/syn/gtech.db)
+    NangateOpenCellLibrary (File: /eda/dk/nangate45/synopsys/NangateOpenCellLibrary_typical_ecsm_nowlm.db)
 
 
 Operating Conditions: typical   Library: NangateOpenCellLibrary
@@ -33,12 +30,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  =   0.0000 uW    (0%)
-  Net Switching Power  =  19.8648 uW  (100%)
+  Cell Internal Power  = 175.5025 uW   (63%)
+  Net Switching Power  = 103.3473 uW   (37%)
                          ---------
-Total Dynamic Power    =  19.8648 uW  (100%)
+Total Dynamic Power    = 278.8498 uW  (100%)
 
-Cell Leakage Power     =   0.0000 nW
+Cell Leakage Power     =  69.4905 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -47,10 +44,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register           0.0000            2.4601            0.0000            2.4601  (  12.38%)
+clock_network      2.5786           16.9314          130.5120           19.6405  (   5.64%)
+register         101.5883           22.6253        1.1699e+04          135.9128  (  39.02%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational      0.0000           17.4047            0.0000           17.4047  (  87.62%)
+combinational     71.3358           63.7905        5.7661e+04          192.7870  (  55.34%)
 --------------------------------------------------------------------------------------------------
-Total              0.0000 uW        19.8648 uW         0.0000 nW        19.8648 uW
+Total            175.5026 uW       103.3472 uW     6.9491e+04 nW       348.3404 uW
 1

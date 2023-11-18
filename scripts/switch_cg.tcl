@@ -12,10 +12,11 @@ read_verilog -netlist $in_verilog_filename
 current_design ${active_design}
 
 read_saif -input ../saif/iir_syn_cg.saif -instance tb_iir/UUT -unit ns -scale 1
+#read_saif -input ../saif/iir_advanced_syn_cg.saif -instance tb_iir/UUT -unit ns -scale 1
 
 
 #create_clock -name clk_swi -period 5.0 CLK
-create_clock -name clk_swi -period 2.5 CLK
+create_clock -name clk_swi -period 2.4 CLK
 
 
 ######################################################################

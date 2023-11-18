@@ -1,10 +1,13 @@
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: The derived toggle rate value (1.000000) for the clock net 'CLK' conflicts with the annotated value (0.200000). Using the annotated value. (PWR-12)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
  
 ****************************************
 Report : power
         -analysis_effort low
-Design : iir
+Design : iir_advanced
 Version: S-2021.06-SP4
-Date   : Thu Nov 16 18:17:21 2023
+Date   : Thu Nov 16 12:39:19 2023
 ****************************************
 
 
@@ -18,7 +21,7 @@ Wire Load Model Mode: top
 
 Design        Wire Load Model            Library
 ------------------------------------------------
-iir                    5K_hvratio_1_1    NangateOpenCellLibrary
+iir_advanced           5K_hvratio_1_1    NangateOpenCellLibrary
 
 
 Global Operating Voltage = 1.1  
@@ -30,12 +33,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  = 271.8874 uW   (58%)
-  Net Switching Power  = 195.0071 uW   (42%)
+  Cell Internal Power  = 173.6751 uW   (58%)
+  Net Switching Power  = 127.1468 uW   (42%)
                          ---------
-Total Dynamic Power    = 466.8945 uW  (100%)
+Total Dynamic Power    = 300.8220 uW  (100%)
 
-Cell Leakage Power     =  59.1155 uW
+Cell Leakage Power     =  70.9011 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -44,10 +47,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network      4.3357           11.2966          130.5120           15.7628  (   3.00%)
-register         101.5370           22.6401        6.0680e+03          130.2451  (  24.76%)
+clock_network      0.5354           13.0083           50.1381           13.5938  (   3.66%)
+register          64.5253           16.1803        1.2860e+04           93.5659  (  25.17%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational    166.0148          161.0705        5.2917e+04          380.0020  (  72.24%)
+combinational    108.6144           97.9582        5.7991e+04          264.5634  (  71.17%)
 --------------------------------------------------------------------------------------------------
-Total            271.8875 uW       195.0071 uW     5.9115e+04 nW       526.0099 uW
+Total            173.6751 uW       127.1467 uW     7.0901e+04 nW       371.7231 uW
 1

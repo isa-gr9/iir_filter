@@ -3,7 +3,7 @@
 Report : clock_gating
 Design : iir
 Version: S-2021.06-SP4
-Date   : Mon Nov 13 16:59:05 2023
+Date   : Thu Nov 16 18:17:21 2023
 ****************************************
 
 Information: Identification of clock-gating cells has not been performed. Pre-existing clock-gating cells will not be reported. (PWR-947)

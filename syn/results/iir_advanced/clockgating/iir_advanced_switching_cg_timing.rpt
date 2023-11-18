@@ -1,0 +1,84 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : iir_advanced
+Version: S-2021.06-SP4
+Date   : Thu Nov 16 12:39:19 2023
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: w_1_reg_3_ (rising edge-triggered flip-flop clocked by clk_swi)
+  Endpoint: g_1_reg_12_
+            (rising edge-triggered flip-flop clocked by clk_swi)
+  Path Group: clk_swi
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  iir_advanced       5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk_swi (rise edge)                0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  w_1_reg_3_/CK (DFFR_X1)                  0.00       0.00 r
+  w_1_reg_3_/Q (DFFR_X1)                   0.10       0.10 r
+  U651/ZN (INV_X1)                         0.03       0.13 f
+  U652/Z (BUF_X4)                          0.06       0.19 f
+  U654/ZN (OAI22_X4)                       0.14       0.33 r
+  U656/ZN (OAI221_X4)                      0.11       0.44 f
+  U657/ZN (INV_X1)                         0.04       0.48 r
+  U830/ZN (NAND2_X1)                       0.03       0.51 f
+  U831/ZN (OAI21_X1)                       0.04       0.55 r
+  U833/Z (XOR2_X1)                         0.08       0.63 r
+  U870/S (FA_X1)                           0.12       0.75 f
+  U872/ZN (NOR2_X1)                        0.04       0.79 r
+  U874/ZN (OAI21_X1)                       0.03       0.82 f
+  U875/ZN (NAND2_X1)                       0.03       0.85 r
+  U877/ZN (AND3_X1)                        0.05       0.90 r
+  U884/ZN (OAI21_X1)                       0.03       0.93 f
+  U887/ZN (NAND2_X1)                       0.03       0.96 r
+  U889/ZN (AND3_X1)                        0.05       1.02 r
+  U903/ZN (OAI21_X1)                       0.03       1.04 f
+  U915/ZN (OAI211_X1)                      0.04       1.08 r
+  U917/ZN (NAND2_X1)                       0.03       1.12 f
+  U919/ZN (NAND2_X1)                       0.03       1.15 r
+  U920/ZN (AND3_X1)                        0.05       1.20 r
+  U931/ZN (OAI21_X1)                       0.03       1.22 f
+  U942/ZN (OAI211_X1)                      0.04       1.27 r
+  U944/ZN (NAND2_X1)                       0.03       1.30 f
+  U948/ZN (NAND2_X1)                       0.03       1.33 r
+  U93/ZN (AND3_X1)                         0.05       1.38 r
+  U953/ZN (OAI21_X1)                       0.03       1.41 f
+  U959/ZN (NAND2_X1)                       0.03       1.44 r
+  U141/ZN (AND3_X1)                        0.05       1.49 r
+  U964/ZN (OAI21_X1)                       0.03       1.52 f
+  U1689/CO (FA_X1)                         0.10       1.62 f
+  U966/ZN (NAND2_X1)                       0.04       1.66 r
+  U967/ZN (NAND3_X1)                       0.05       1.70 f
+  U970/ZN (NAND2_X1)                       0.04       1.74 r
+  U972/ZN (AND3_X2)                        0.06       1.80 r
+  U1690/ZN (OAI21_X1)                      0.03       1.83 f
+  U1695/ZN (XNOR2_X1)                      0.05       1.88 f
+  g_1_reg_12_/D (DFFR_X1)                  0.01       1.89 f
+  data arrival time                                   1.89
+
+  clock clk_swi (rise edge)                2.00       2.00
+  clock network delay (ideal)              0.00       2.00
+  g_1_reg_12_/CK (DFFR_X1)                 0.00       2.00 r
+  library setup time                      -0.04       1.96
+  data required time                                  1.96
+  -----------------------------------------------------------
+  data required time                                  1.96
+  data arrival time                                  -1.89
+  -----------------------------------------------------------
+  slack (MET)                                         0.07
+
+
+1
